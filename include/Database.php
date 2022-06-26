@@ -3,10 +3,10 @@
 class Database
 {
     
-    private $host = "localhost";
-    private $db_name = "biblioteca";
-    private $username = "root";
-    private $password = "root";
+    private $host = "sql11.freesqldatabase.com";
+    private $db_name = "sql11502237";
+    private $username = "sql11502237";
+    private $password = "XnVUZ6kNlW";
     private $conn;
 
     public function getConnection()
