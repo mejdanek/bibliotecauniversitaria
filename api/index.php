@@ -39,8 +39,11 @@ switch($method){
         break;
     case 'OPTIONS':
         $response['message'] = "available operations: GET, POST, PUT, DELETE";
+        break;
 }
 
 $json_response = json_encode($response);
 echo $json_response;
+$db = null;
+$conn = null;
 ?>
