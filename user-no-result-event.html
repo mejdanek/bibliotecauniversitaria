@@ -1,0 +1,52 @@
+<?php
+//session_start();
+$user=$_SESSION["user"];
+$pwd=$_SESSION["pwd"];
+if(empty($user)){
+	header("Location:../tec_web/login.html.php");
+    exit;
+}
+?>
+    <!DOCTYPE html>
+    <html lang="it-IT">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
+        <meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
+        <meta name="author" content="Alessia Aniceto">
+        <title>Cerca eventi</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    </head>
+
+    <body>
+        <!--Barra di navigazione-->
+        <nav>
+            <ul id="menu">
+                <li><a href="home.php">Home</a></li>
+                <li><a class="active" href="user-search-events.html.php">Cerca eventi</a></li>
+                <li style="float:right"><a href="user-profile.php">Pagina Utente</a></li>
+            </ul>
+        </nav>
+        <header>
+            <br>
+            <!--LogoICT-->
+            <a href="home.html"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
+            <!--Titolo-->
+        </header>
+
+        <body>
+            <div id="center">
+                <h1> Nessun evento trovato!</h1><br><br>
+                <form action="user-search-events.html.php" method="post" name="back">
+                    <input type="submit" value="Torna indietro e cerca ancora!">
+                </form>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <footer>
+                <p id="p04">&copy; Copyright 2020. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
+            </footer>
+        </body>
+
+    </html>

@@ -1,0 +1,255 @@
+<?php
+session_start(); // inizio la sessione
+$adminuser = $_SESSION["adminuser"]; // prendo la variabile di sessione
+if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
+	header("Location:../tec_web/admin-login.html.php"); // reindirizzo l'utente alla pagina di login
+	exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="it-IT">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
+	<meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
+	<meta name="author" content="Alessia Aniceto">
+	<title>Admin Area</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
+	<script src="jquery-3.4.1.js" type="text/javascript"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<script>
+		jQuery(document).ready(function() { // il codice incluso verrà eseguito solo quando la pagina DOM è pronta per l'esecuzione del codice JavaScript
+
+			// read
+			on_read = function() {
+				$.ajax({
+					url: "http://localhost/REST/api_server/api/read.php", // specifica l'URL a cui inviare la richiesta
+					type: "GET", // specifica il tipo di richiesta
+					success: function(response) { // response = lista di eventi (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
+						// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
+						html_table = `<table id='center'>
+						<tr>
+							<th>Nome</th>
+							<th>Città</th>
+							<th>Tipo</th>
+							<th></th>
+						</tr>`;
+						for (i = 0; i < response.evento.length; i++) { // ciclo for per ciclare sull'array
+							nome = response.evento[i].nome; // prendo i valori delle proprietà di ogni singolo evento
+							citta = response.evento[i].citta;
+							tipo = response.evento[i].tipo;
+							id_delete = response.evento[i].id;
+							html_table += "<tr><td>" + nome + "</td><td> " + citta + "</td><td> " + tipo + "</td><td><input type='image' class='delete-button' src='images/cestino.png' value='" + id_delete + "'></td></tr>";
+						}
+						html_table += "</table>";
+						$("#eventi").html(html_table); // inserisco la tabella degli eventi nel div #eventi
+						$(".delete-button").on("click", on_delete); // all'on click del cestino parte la funzione on_delete()
+						$("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
+					},
+					error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
+						// stampo l'errore sulla console
+						console.log(xhr, err, exc);
+					}
+				});
+				return false; // necessario per far funzionare l'on submit (senza parte la request legata all'attributo href)
+			}
+			on_read(); // all'apertura della pagina admin-home.php parte la funzione on_read()
+
+
+
+			// delete
+			on_delete = function(event) {
+				/**
+				 * A differenza delle altre, la callback "on_delete" utilizza il parametro in ingresso "event"
+				 * associato all'elemento html cliccato (ovvero il cestino). Serve "event" perché in questo caso
+				 * è presente un cestino per ogni riga, quindi quando si invoca questa callback è necessario
+				 * capire in che riga si è cliccato.
+				 * In dettaglio, il "event.target.value" corrisponde all'id dell'evento che si vuole eliminare, poiché
+				 * è stato così settato in fase di read (si veda la callback "on_read").
+				 */
+				conf = confirm("Sei sicuro di voler eliminare questo evento?"); // finestra di dialogo per confermare la cancellazione di un evento
+				if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
+					$.ajax({
+						url: "http://localhost/REST/api_server/api/delete.php?id=" + event.target.value, // specifica l'URL a cui inviare la richiesta
+						type: "DELETE", // specifica il tipo di richiesta
+						contentType: 'application/json', // il tipo di contenuto utilizzato durante l'invio di dati al server
+						success: function(response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
+							// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
+							alert("Evento eliminato!");
+							on_read(); // dopo aver eliminato l'evento parte la funzione on_read() per leggere nuovamente tutti gli eventi 
+						},
+						error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
+							// stampo l'errore sulla console
+							console.log(xhr, err, exc);
+						}
+					});
+					return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
+				}
+			}
+
+			// search
+			$("#search-form").on("submit", function() { // al submit della barra di ricerca...
+				var s_search = $("#search-form").find("input[name='search']").val(); // prendo la keyowrd inserita dall'utente nell'input 
+				$.ajax({
+					url: "http://localhost/REST/api_server/api/search.php?s=" + s_search, // specifica l'URL a cui inviare la richiesta
+					type: "GET", // specifica il tipo di richiesta
+					success: function(response) { // response = lista di eventi (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
+						// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
+						html_table = `<table id='center'>
+						<tr>
+							<th>Nome</th>
+							<th>Città</th>
+							<th>Tipo</th>
+							<th></th>
+						</tr>`;
+						if (response.eventi.length > 0) { // se la response restituisce qualche evento
+							for (i = 0; i < response.eventi.length; i++) { // ciclo for sull'array response
+								nome = response.eventi[i].nome; // prendo i valori delle proprietà di ogni singolo evento
+								citta = response.eventi[i].citta;
+								tipo = response.eventi[i].tipo;
+								id_delete = response.eventi[i].id;
+								html_table += "<tr><td>" + nome + "</td><td> " + citta + "</td><td> " + tipo + "</td><td><input type='image' class='delete-button' src='images/cestino.png' value='" + id_delete + "'></td></tr>";
+							}
+						} else {
+							html_table += `<tr>
+							<td colspan='4'>Nessun risultato per "${s_search}"</td>
+							</tr>`;
+						}
+						html_table += "</table>";
+						$("#eventi").html(html_table); // inserisco la tabella nel div #eventi
+						$(".delete-button").on("click", on_delete); // all'on click del cestino parte la funzione on_delete()
+						$("#read-all").on("submit", on_read); // all'on submit dell pulsante #read-all parte la funzione on_read()
+					},
+					error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
+						// stampo l'errore sulla console
+						console.log(xhr, err, exc);
+					}
+				});
+				return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
+			});
+
+			// create
+			on_create = function() {
+				var formData = {}; // inizializzo un oggetto
+				for (var form of $("#creaevento").serializeArray()) { // ciclo for per creare il body per la POST seguente a partire dai valori presenti nel form
+					// il metodo serializeArray() crea un array di oggetti JavaScript, pronto per essere codificato come stringa JSON
+					formData[form['name']] = form['value'];
+				}
+				$.ajax({
+					url: "http://localhost/REST/api_server/api/create.php", // specifica l'URL a cui inviare la richiesta
+					type: "POST", // specifica il tipo di richiesta
+					contentType: 'application/json', // il tipo di contenuto utilizzato durante l'invio di dati al server
+					dataType: "json", // il tipo di dati previsto dalla risposta del server
+					data: JSON.stringify(formData), // specifica i dati da inviare al server
+					success: function(response) { // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
+						// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
+						alert("Evento creato!");
+						on_read(); // dopo la creazione dell'evento parte la funzione on_read()
+					},
+					error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
+						// stampo l'errore sulla console
+						console.log(xhr, err, exc);
+					}
+				});
+				return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
+			}
+			$("#creaevento").on("submit", on_create); // all'on submit del form #creaevento parte la funzione on_create()
+		});
+	</script>
+</head>
+
+<body>
+	<!--Barra di navigazione-->
+	<nav>
+		<ul id="menu">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="login.html.php">Area Utenti</a></li>
+			<li style="float:right"><a class="active" href="admin-home.php">Admin Area</a></li>
+		</ul>
+	</nav>
+	<header>
+		<!--LogoICT-->
+		<a href="index.html"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
+		<!--Titolo-->
+		<h1>Admin Area di <?php echo $adminuser ?></h1>
+	</header><br><br><br><br>
+	<!--Immagine destra-->
+	<div id="right">
+		<img src="images/admin.png" alt="admin" title="Admin" width="190">
+	</div><br>
+	<!--Inizio form-->
+	<div id="center">
+		<fieldset>
+			<h2>Cerca eventi</h2><br>
+			<div id="search-row">
+				<form id="search-form" method="post" name="search-form">
+					<input type="text" name="search" placeholder="Cerca...">
+					<input type="image" src="images/search.png" value="Cerca" id="search-button">
+				</form>
+				<form id='read-all' name='read-all'>
+					<input type='submit' value='Mostra tutti gli eventi'>
+				</form>
+			</div>
+			<br><br>
+			<div id="eventi"></div><br><br>
+		</fieldset>
+		<br>
+
+		<fieldset>
+			<h2>Aggiungi evento</h2><br>
+			<form id="creaevento" method="post" name="aggiungieventi">
+				<label for="nome"><b>Nome Evento</b></label><br>
+				<input type="text" name="nome" placeholder="Nome Evento" required><br><br>
+				<label for="citta"><b>Città Evento</b></label><br>
+				<input type="text" name="citta" placeholder="Città Evento" required><br><br>
+				<label for="tipo"><b>Tipo Evento</b></label><br>
+				<select name="tipo" id="tipo" required>
+					<option hidden disabled selected value> -- seleziona un'opzione -- </option>
+					<option value="Concerti">Concerti</option>
+					<option value="Cinema">Cinema</option>
+					<option value="Teatro">Teatro</option>
+					<option value="Musei">Musei</option>
+				</select><br><br>
+				<input type="submit" id="create" value="Aggiungi"><br><br>
+			</form>
+		</fieldset>
+		<br>
+
+		<fieldset>
+			<h2>Elimina Utenti</h2><br>
+			<form action="admin-delete-user.php" method="post" name="eliminauser">
+				<label for="user"><b>Inserire Username da eliminare:</b></label><br>
+				<input type="text" name="user" placeholder="Inserisci Username da eliminare" required><br><br>
+				<input type="submit" value="Elimina Utente"><br><br>
+			</form>
+		</fieldset>
+		<br>
+
+		<fieldset>
+			<h2>Modifica Username</h2><br>
+			<form action="admin-update-user.php" method="post" name="modificauser">
+				<label for="olduser"><b>Vecchio Username</b></label><br>
+				<input type="text" name="olduser" placeholder="Vecchio Username" required><br><br>
+				<label for="newuser"><b>Nuovo Username</b></label><br>
+				<input type="text" name="newuser" placeholder="Nuovo Username" required><br><br>
+				<input type="submit" value="Modifica Username"><br><br>
+			</form>
+		</fieldset>
+		<br>
+
+		<h2>Clicca qui per effettuare il logout:</h2><br><br>
+		<div id="center">
+			<form action="admin-logout.php" method="post" name="logout">
+				<input type="submit" value="Logout">
+			</form>
+		</div>
+		<br>
+
+		<footer>
+			<p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
+		</footer>
+	</div>
+</body>
+
+</html>
