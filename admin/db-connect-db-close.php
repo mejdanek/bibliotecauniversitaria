@@ -1,10 +1,10 @@
 <?php
 function db_connect()
 {
-	$host = "sql11.freesqldatabase.com";
-	$hostuser = "sql11502237";
-	$pass = "XnVUZ6kNIW";
-	$database = "sql11502237";
+	$host = "localhost";
+	$hostuser = "root";
+	$pass = "root";
+	$database = "biblioteca";
 
 	try {
 		//Mi connetto al DBMS

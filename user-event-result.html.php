@@ -2,7 +2,7 @@
 session_start(); // inizio la sessione
 $user = $_SESSION["user"]; // prendo la variabile di sessione
 if (empty($user)) { // se la variabile di sessione non è stata settata (è vuota)
-	header("Location:../tec_web/login.html.php"); // reindirizzo l'utente alla pagina di login
+	header("Location:login.html.php"); // reindirizzo l'utente alla pagina di login
 	exit;
 } else { // altrimenti prendo i dati dell'evento scelti dall'utente
 	include_once 'db-connect-db-close.php'; // includo il file di connessione e di chiusura del db
@@ -12,18 +12,9 @@ if (empty($user)) { // se la variabile di sessione non è stata settata (è vuot
 	$citta = mysqli_real_escape_string($conn, $_POST["citta"]);
 }
 ?>
-<!DOCTYPE html>
-<html lang="it-IT">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-	<meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-	<meta name="author" content="Alessia Aniceto">
-	<title>Cerca eventi</title>
-	<link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
+<?php
+include 'common/header.html';
+?>
 
 <body>
 	<!--Barra di navigazione-->
@@ -77,9 +68,6 @@ if (empty($user)) { // se la variabile di sessione non è stata settata (è vuot
 		</form>
 		</fieldset>
 	</div><br><br>
-	<footer>
-		<p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-	</footer>
-</body>
-
-</html>
+	<?php
+include 'common/footer.html';
+?>

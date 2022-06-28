@@ -2,29 +2,22 @@
 session_start(); // inizio la sessione
 $adminuser = $_SESSION["adminuser"]; // prendo la variabile di sessione
 if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
-	header("Location:../tec_web/admin-login.html.php"); // reindirizzo l'utente alla pagina di login
+	header("Location:admin-login.html.php"); // reindirizzo l'utente alla pagina di login
 	exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="it-IT">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-	<meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-	<meta name="author" content="Alessia Aniceto">
-	<title>Admin Area</title>
-	<link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-	<script src="jquery-3.4.1.js" type="text/javascript"></script>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<?php
+include '../common/header.html';
+?>
+
 	<script>
 		jQuery(document).ready(function() { // il codice incluso verrà eseguito solo quando la pagina DOM è pronta per l'esecuzione del codice JavaScript
 
 			// read
 			on_read = function() {
 				$.ajax({
-					url: "http://localhost/REST/api_server/api/read.php", // specifica l'URL a cui inviare la richiesta
+					url: "http://localhost/bibliotecauniversitaria/rest/read.php", // specifica l'URL a cui inviare la richiesta
 					type: "GET", // specifica il tipo di richiesta
 					success: function(response) { // response = lista di eventi (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
 						// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
@@ -71,7 +64,7 @@ if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
 				conf = confirm("Sei sicuro di voler eliminare questo evento?"); // finestra di dialogo per confermare la cancellazione di un evento
 				if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
 					$.ajax({
-						url: "http://localhost/REST/api_server/api/delete.php?id=" + event.target.value, // specifica l'URL a cui inviare la richiesta
+						url: "http://localhost/bibliotecauniversitaria/rest/delete.php?id=" + event.target.value, // specifica l'URL a cui inviare la richiesta
 						type: "DELETE", // specifica il tipo di richiesta
 						contentType: 'application/json', // il tipo di contenuto utilizzato durante l'invio di dati al server
 						success: function(response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
@@ -92,7 +85,7 @@ if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
 			$("#search-form").on("submit", function() { // al submit della barra di ricerca...
 				var s_search = $("#search-form").find("input[name='search']").val(); // prendo la keyowrd inserita dall'utente nell'input 
 				$.ajax({
-					url: "http://localhost/REST/api_server/api/search.php?s=" + s_search, // specifica l'URL a cui inviare la richiesta
+					url: "http://localhost/bibliotecauniversitaria/rest/search.php?s=" + s_search, // specifica l'URL a cui inviare la richiesta
 					type: "GET", // specifica il tipo di richiesta
 					success: function(response) { // response = lista di eventi (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
 						// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
@@ -137,7 +130,7 @@ if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
 					formData[form['name']] = form['value'];
 				}
 				$.ajax({
-					url: "http://localhost/REST/api_server/api/create.php", // specifica l'URL a cui inviare la richiesta
+					url: "http://localhost/bibliotecauniversitaria/rest/create.php", // specifica l'URL a cui inviare la richiesta
 					type: "POST", // specifica il tipo di richiesta
 					contentType: 'application/json', // il tipo di contenuto utilizzato durante l'invio di dati al server
 					dataType: "json", // il tipo di dati previsto dalla risposta del server
@@ -157,20 +150,31 @@ if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
 			$("#creaevento").on("submit", on_create); // all'on submit del form #creaevento parte la funzione on_create()
 		});
 	</script>
-</head>
 
 <body>
 	<!--Barra di navigazione-->
-	<nav>
-		<ul id="menu">
-			<li><a href="index.html">Home</a></li>
-			<li><a href="login.html.php">Area Utenti</a></li>
-			<li style="float:right"><a class="active" href="admin-home.php">Admin Area</a></li>
-		</ul>
-	</nav>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html.php">Login utenti</a>
+            </li>
+            <li class="nav-item"><a></a></li>
+            <li class="nav-item active">
+              <a class="nav-link" href="admin-login.html.php">Login admin</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
 	<header>
 		<!--LogoICT-->
-		<a href="index.html"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
+		<a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
 		<!--Titolo-->
 		<h1>Admin Area di <?php echo $adminuser ?></h1>
 	</header><br><br><br><br>
@@ -246,10 +250,6 @@ if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
 		</div>
 		<br>
 
-		<footer>
-			<p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-		</footer>
-	</div>
-</body>
-
-</html>
+		<?php
+include '../common/footer.html';
+?>

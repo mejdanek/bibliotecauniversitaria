@@ -1,30 +1,21 @@
 <?php
 session_start(); // inizio la sessione
 $adminuser = $_SESSION["adminuser"]; // prendo la variabile di sessione
-if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è vuota)
-    header("Location:../tec_web/admin-login.html.php"); // reindirizzo l'admin alla pagina di login
+if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
+    header("Location:admin-login.html.php"); // reindirizzo l'utente alla pagina di login
     exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="it-IT">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-    <meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-    <meta name="author" content="Alessia Aniceto">
-    <title>Admin Area</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-    <script src="jquery-3.4.1.js" type="text/javascript"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<?php
+include 'common/header.html';
+?>
     <script>
         jQuery(document).ready(function() {
 
             // ***** read
             on_read = function() {
                 $.ajax({
-                    url: "http://localhost/REST/api_server/api/read.php",
+                    url: "http://localhost/bibliotecauniversitaria/rest/read.php",
                     type: "GET",
                     success: function(response) { // response = lista di eventi (array di oggetti JSON)
                         html_table = `<table id='center'>
@@ -55,8 +46,6 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
             }
             on_read();
 
-
-
             // ***** delete
             on_delete = function(event) {
                 /**
@@ -70,11 +59,10 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
                 conf = confirm("Sei sicuro di voler eliminare questo evento?");
                 if (conf) {
                     $.ajax({
-                        url: "http://localhost/REST/api_server/api/delete.php?id=" + event.target.value,
+                        url: "http://localhost/bibliotecauniversitaria/rest/delete.php?id=" + event.target.value,
                         type: "DELETE",
                         contentType: 'application/json', // content-type dei dati della request
-                        success: function(response) { // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
-                            // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
+                        success: function(response) { // response = messaggio
                             alert("Evento eliminato!");
                             on_read();
                         },
@@ -91,7 +79,7 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
             $("#search-form").on("submit", function() {
                 var s_search = $("#search-form").find("input[name='search']").val();
                 $.ajax({
-                    url: "http://localhost/REST/api_server/api/search.php?s=" + s_search,
+                    url: "http://localhost/bibliotecauniversitaria/rest/search.php?s=" + s_search,
                     type: "GET",
                     success: function(response) { // response = lista di eventi (array di oggetti JSON)
                         html_table = `<table id='center'>
@@ -135,7 +123,7 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
                     formData[form['name']] = form['value'];
                 }
                 $.ajax({
-                    url: "http://localhost/REST/api_server/api/create.php",
+                    url: "http://localhost/bibliotecauniversitaria/rest/create.php",
                     type: "POST",
                     contentType: 'application/json', // content-type dei dati della request
                     dataType: "json",
@@ -154,20 +142,32 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
             $("#creaevento").on("submit", on_create);
         });
     </script>
-</head>
 
 <body>
     <!--Barra di navigazione-->
-    <nav>
-        <ul id="menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="login.html.php">Area Utenti</a></li>
-            <li style="float:right"><a class="active" href="admin-home.php">Admin Area</a></li>
-        </ul>
+    <!--Barra di navigazione-->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html.php">Login utenti</a>
+            </li>
+            <li class="nav-item"><a></a></li>
+            <li class="nav-item active">
+              <a class="nav-link" href="admin-login.html.php">Login admin</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
     </nav>
     <header>
         <!--LogoICT-->
-        <a href="index.html"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
+        <a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
         <!--Titolo-->
         <h1>Admin Area di
             <?php echo $adminuser ?>
@@ -218,6 +218,7 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
         <fieldset>
             <h2>Elimina Utenti</h2><br>
             <form action="admin-delete-user.php" method="post" name="eliminauser">
+                <p id="red"><b>User errato! Riprova</b></p>
                 <label for="user"><b>Inserire Username da eliminare:</b></label><br>
                 <input type="text" name="user" placeholder="Inserisci Username da eliminare" required><br><br>
                 <input type="submit" value="Elimina Utente"><br><br>
@@ -228,7 +229,6 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
         <fieldset>
             <h2>Modifica Username</h2><br>
             <form action="admin-update-user.php" method="post" name="modificauser">
-                <p id="red"><b>Dati errati! Riprova</b></p>
                 <label for="olduser"><b>Vecchio Username</b></label><br>
                 <input type="text" name="olduser" placeholder="Vecchio Username" required><br><br>
                 <label for="newuser"><b>Nuovo Username</b></label><br>
@@ -246,10 +246,6 @@ if (empty($adminuser)) { // se la variabile di sessione non è stata settata (è
         </div>
         <br>
 
-        <footer>
-            <p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-        </footer>
-    </div>
-</body>
-
-</html>
+<?php
+include 'common/footer.html';
+?>

@@ -2,34 +2,37 @@
 session_start(); // inizio la sessione
 $user = $_SESSION["user"]; // prendo le variabili di sessione
 if (empty($user)) {  // se la variabile non è stata settata (è vuota)
-	header("Location:../tec_web/login.html.php"); // reindirizzo l'utente alla pagina di login
+	header("Location:login.html.php"); // reindirizzo l'utente alla pagina di login
 	exit;
 } else {
 	echo "<h2>Benvenuto/a $user!</h2>"; // altrimenti stampo una frase di bevenuto personalizzata
 }
 ?>
-<!DOCTYPE html>
-<html lang="it-IT">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-	<meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-	<meta name="author" content="Alessia Aniceto">
-	<title>Tempo libero: cultura e sport</title>
-	<link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
+<?php
+include 'common/header.html';
+?>
 
 <body>
 	<!--Barra di navigazione-->
-	<nav>
-		<ul id="menu">
-			<li><a class="active" href="home.php">Home</a></li>
-			<li><a href="user-search-events.html.php">Cerca eventi</a></li>
-			<li style="float:right"><a href="user-profile.php">Pagina Utente</a></li>
-		</ul>
-	</nav>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html.php">Login utenti</a>
+            </li>
+            <li class="nav-item"><a></a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin-login.html.php">Login admin</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
 	<header>
 		<!--LogoICT-->
 		<a href="home.php"><img id="left2" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
@@ -48,9 +51,6 @@ if (empty($user)) {  // se la variabile non è stata settata (è vuota)
 			Per conoscere <b>opportunità</b> e <b>agevolazioni</b> offerte agli studenti di <strong>Torino</strong>, puoi visitare la pagina <a href="https://www.unito.it/servizi/lo-sport-cultura-e-tempo-libero" title="external link" target="_blank">"Per lo sport, cultura e tempo libero"</a>.<br><br>
 		</p>
 	</div>
-	<footer>
-		<p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-	</footer>
-</body>
-
-</html>
+	<?php
+include 'common/footer.html';
+?>

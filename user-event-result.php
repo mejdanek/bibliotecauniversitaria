@@ -2,7 +2,7 @@
 session_start(); // inizio la sessione
 $user = $_SESSION["user"]; // prendo la variabile di sessione
 if (empty($user)) {  // se la variabile di sessione è vuota
-	header("Location:../tec_web/login.html.php"); // reindirizzo l'utente alla pagina di login
+	header("Location:login.html.php"); // reindirizzo l'utente alla pagina di login
 	exit;
 } else { // altrimenti prendo i dati inseriti dall'utente
 	include_once 'db-connect-db-close.php'; // includo il file di connessione e di chiusura del db
