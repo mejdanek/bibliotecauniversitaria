@@ -1,14 +1,15 @@
 <?php
-class Evento
+class Libro
 {
-	// variabili d'istanza (proprietà degli eventi)
+	// variabili d'istanza Libro
 	private $conn;
-	public $id;
-	public $nome;
-	public $tipo;
-	public $citta;
+	public $isbn;
+	public $titolo;
+	public $autore;
+	public $editore;
+    public $giacenza;
 
-	// construttore che inizializza la variabile $conn per la connessione
+	// costruttore per la connessione al database
 	public function __construct($db)
 	{
 		$this->conn = $db;
@@ -18,33 +19,34 @@ class Evento
 	function read()
 	{
 		// seleziono tutti gli eventi ordinandoli per il nome in ordine alfabetico
-		$query = "SELECT * FROM eventi ORDER BY eventi.nome ASC";
+		$query = "SELECT * FROM libri ORDER BY libri.titolo ASC";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 		// eseguo la query
 		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
 		return $stmt;
 	}
-
 
 	// servizio di creazione
 	function create()
 	{
 		// inserisco il nuovo evento
-		$query = "INSERT INTO eventi SET
-				  nome=:nome, tipo=:tipo, citta=:citta";
+		$query = "INSERT INTO libri SET
+				  titolo=:titolo, autore=:autore, editore=:editore, isbn=:isbn";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 
-		// sanifico
-		$this->nome = htmlspecialchars(strip_tags($this->nome));
-		$this->tipo = htmlspecialchars(strip_tags($this->tipo));
-		$this->citta = htmlspecialchars(strip_tags($this->citta));
+		// rimuovo caratteri speciali eventualmente inseriti nel form
+		$this->titolo = htmlspecialchars(strip_tags($this->titolo));
+		$this->autore = htmlspecialchars(strip_tags($this->autore));
+		$this->editore = htmlspecialchars(strip_tags($this->editore));
+		$this->isbn = htmlspecialchars(strip_tags($this->isbn));
 
-		// invio i valori del nuovo evento per i parametri
-		$stmt->bindParam(":nome", $this->nome);
-		$stmt->bindParam(":tipo", $this->tipo);
-		$stmt->bindParam(":citta", $this->citta);
+		// invio i valori del nuovo libro per i parametri
+		$stmt->bindParam(":titolo", $this->titolo);
+		$stmt->bindParam(":autore", $this->autore);
+		$stmt->bindParam(":editore", $this->editore);
+        $stmt->bindParam(":isbn", $this->isbn);
 
 		// eseguo la query
 		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
@@ -52,18 +54,17 @@ class Evento
 		return $stmt;
 	}
 
-
 	// servizio di cancellazione
 	function delete()
 	{
-		// cancello l'evento con l'id indicato
-		$query = "DELETE FROM eventi WHERE id = ?";
+		// cancello il libro con l'isbn indicato
+		$query = "DELETE FROM eventi WHERE isbn = ?";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 		// sanifico
-		$this->id = htmlspecialchars(strip_tags($this->id));
-		// invio il valore dell'evento per il parametro
-		$stmt->bindParam(1, $this->id);
+		$this->id = htmlspecialchars(strip_tags($this->isbn));
+		// invio il valore del libro per il parametro
+		$stmt->bindParam(1, $this->isbn);
 		// eseguo la query
 		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
 		return $stmt;
@@ -73,13 +74,13 @@ class Evento
 	function search($keywords)
 	{
 		// cerco gli eventi ordinandoli per il nome in ordine alfabetico
-		$query = "SELECT * FROM eventi
-				  WHERE eventi.nome LIKE ? OR eventi.tipo LIKE ? OR eventi.citta LIKE ?
-				  ORDER BY eventi.nome ASC";
+		$query = "SELECT * FROM libri
+				  WHERE libri.titolo LIKE ? OR libri.autore LIKE ? OR libri.editore LIKE ? OR libri.isbn LIKE ?
+				  ORDER BY libri.titolo ASC";
 
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
-		// sanifico
+		// rimuovo caratteri speciali eventualmente inseriti nel form
 		$keywords = htmlspecialchars(strip_tags($keywords));
 		// % prima e dopo le keywords serve per estrarre i testi che contiene la keyword
 		$keywords = "%{$keywords}%";

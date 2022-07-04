@@ -8,7 +8,7 @@ if (empty($adminuser)) { // se la variabile non è stata settata (è vuota)
 ?>
 
 <?php
-include '../common/header.html';
+include 'common/header.html';
 ?>
 
 	<script>
@@ -147,7 +147,7 @@ include '../common/header.html';
 				});
 				return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
 			}
-			$("#creaevento").on("submit", on_create); // all'on submit del form #creaevento parte la funzione on_create()
+			$("#crealibro").on("submit", on_create); // all'on submit del form #crealibro parte la funzione on_create()
 		});
 	</script>
 
@@ -247,5 +247,5 @@ include '../common/header.html';
 		<br>
 
 		<?php
-include '../common/footer.html';
+include 'common/footer.html';
 ?>
