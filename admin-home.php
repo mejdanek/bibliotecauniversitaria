@@ -125,7 +125,7 @@ include '../common/header.html';
 			// create
 			on_create = function() {
 				var formData = {}; // inizializzo un oggetto
-				for (var form of $("#creaevento").serializeArray()) { // ciclo for per creare il body per la POST seguente a partire dai valori presenti nel form
+				for (var form of $("#crealibro").serializeArray()) { // ciclo for per creare il body per la POST seguente a partire dai valori presenti nel form
 					// il metodo serializeArray() crea un array di oggetti JavaScript, pronto per essere codificato come stringa JSON
 					formData[form['name']] = form['value'];
 				}
@@ -137,7 +137,7 @@ include '../common/header.html';
 					data: JSON.stringify(formData), // specifica i dati da inviare al server
 					success: function(response) { // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
 						// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-						alert("Evento creato!");
+						alert("Libro inserito!");
 						on_read(); // dopo la creazione dell'evento parte la funzione on_read()
 					},
 					error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
@@ -201,20 +201,16 @@ include '../common/header.html';
 		<br>
 
 		<fieldset>
-			<h2>Aggiungi evento</h2><br>
-			<form id="creaevento" method="post" name="aggiungieventi">
-				<label for="nome"><b>Nome Evento</b></label><br>
-				<input type="text" name="nome" placeholder="Nome Evento" required><br><br>
-				<label for="citta"><b>Città Evento</b></label><br>
-				<input type="text" name="citta" placeholder="Città Evento" required><br><br>
-				<label for="tipo"><b>Tipo Evento</b></label><br>
-				<select name="tipo" id="tipo" required>
-					<option hidden disabled selected value> -- seleziona un'opzione -- </option>
-					<option value="Concerti">Concerti</option>
-					<option value="Cinema">Cinema</option>
-					<option value="Teatro">Teatro</option>
-					<option value="Musei">Musei</option>
-				</select><br><br>
+			<h2>Aggiungi libro</h2><br>
+			<form id="crealibro" method="post" name="aggiungilibro">
+				<label for="titolo"><b>Titolo libro</b></label><br>
+				<input type="text" name="titolo" placeholder="Inserire titolo" required><br><br>
+				<label for="autore"><b>Autore libro</b></label><br>
+				<input type="text" name="autore" placeholder="Inserire autore" required><br><br>
+				<label for="editore"><b>Editore libro</b></label><br>
+				<input type="text" name="editore" placeholder="Inserire editore" required><br><br>
+				<label for="isbn"><b>Codice ISBN</b></label><br>
+				<input type="text" name="isbn" placeholder="Inserire ISBN" required><br><br>
 				<input type="submit" id="create" value="Aggiungi"><br><br>
 			</form>
 		</fieldset>

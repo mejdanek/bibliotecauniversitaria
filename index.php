@@ -1,5 +1,5 @@
 <?php
-include './common/header.html';
+include 'common/header.html';
 ?>
 
 <body>
@@ -16,7 +16,7 @@ include './common/header.html';
                     </li>
                     <li class="nav-item"><a></a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin/admin-login.html.php">Login admin</a>
+                        <a class="nav-link" href="admin-login.html.php">Login admin</a>
                     </li>
                 </ul>
 
@@ -33,7 +33,7 @@ include './common/header.html';
                 <h1>Tempo libero: cultura e sport per studenti</h1><br><br><br>
             </header>
             <!--Immagine Torino-->
-            <div id="center"><img src="images/torino.gif" width="750" alt="Torino" title="Immagine panorama Torino"><br><br>
+            <div id="center"><br><br>
             </div>
             <div id="main">
                 <!--Inizio contenuto della pagina-->

@@ -1,6 +1,6 @@
 <?php
 session_start(); // inizio la sessione
-include_once '../classes/Database.php';
+include_once 'classes/Database.php';
 
 $database = new Database();
 $conn = $database->getConnection();
