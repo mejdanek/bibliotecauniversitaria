@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="it-IT">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-    <meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-    <meta name="author" content="Alessia Aniceto">
-    <title>Registrati</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <script src="jquery-3.4.1.js" type="text/javascript"></script>
+<?php
+include 'common/header.html';
+?>
     <script>
         jQuery(document).ready(function() { // il codice incluso verrà eseguito solo quando la pagina DOM è pronta per l'esecuzione del codice JavaScript
             $("#registration-form").on("submit", function() { // al submit del form
@@ -23,7 +14,6 @@
             })
         })
     </script>
-</head>
 
 <body>
     <!--Barra di navigazione-->
@@ -47,6 +37,8 @@
           </div>
         </div>
       </nav>
+      <main role="main" class="container">
+		<div class="jumbotron">
     <header>
         <br>
         <!--LogoICT-->
@@ -61,7 +53,6 @@
     <div id="center">
         <form id="registration-form" action="registration.php" method="post" name="registrazione">
             <fieldset><br>
-                <p id="red"><b>I campi "nome", "cognome", "università" e "username" non possono essere solo numerici, riprova!</b></p>
                 <label for="nome"><b>Nome</b></label><br>
                 <input type="text" id="nome" name="nome" placeholder="Nome" required><br><br>
                 <label for="cognome"><b>Cognome</b></label><br>
@@ -88,6 +79,7 @@
                 <input type="checkbox" name="check" id="esame4" value="6">Esame 4: 6 cfu<br>
                 <input type="checkbox" name="check" id="esame5" value="9">Esame 5: 9 cfu<br><br>
                 <input type="hidden" name="somma" id="somma" value="somma">
+                <p id=red><b>Username già esistente!</b></p>
                 <label for="user"><b>Inserisci un username</b></label><br>
                 <input type="text" id="user" name="user" placeholder="Username" required><br><br>
                 <label for="pwd"><b>Inserisci una password</b></label><br>
@@ -96,9 +88,8 @@
             </fieldset><br>
         </form>
     </div>
-    <footer>
-        <p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-    </footer>
-</body>
-
-</html>
+    </div>
+      </main>
+    <?php
+	include 'common/footer.html';
+	?>

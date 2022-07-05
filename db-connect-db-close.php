@@ -3,7 +3,7 @@ function db_connect()
 {
 	$host = "localhost";
 	$hostuser = "root";
-	$pass = "root";
+	$pass = "";
 	$database = "biblioteca";
 
 	try {

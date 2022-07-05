@@ -8,7 +8,7 @@ header("Access-Control-Allow-Methods: POST");
 
 // includo le classi per la gestione dei dati
 include_once '../classes/Database.php';
-include_once '../classes/Libro  .php';
+include_once '../classes/Libro.php';
 
 // creo una connessione al DBMS
 $database = new Database();

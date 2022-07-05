@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="it-IT">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-	<meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-	<meta name="author" content="Alessia Aniceto">
-	<title>Admin Area</title>
-	<link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
+<?php
+include 'common/header.html';
+?>
 
 <body>
 	<!--Barra di navigazione-->
@@ -56,9 +47,6 @@
 		</form>
 	</div>
 
-	<footer>
-		<p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-	</footer>
-</body>
-
-</html>
+	<?php
+	include 'common/footer.html';
+	?>

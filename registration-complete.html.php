@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="it-IT">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-    <meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-    <meta name="author" content="Alessia Aniceto">
-    <title>Tempo libero: cultura e sport</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
+<?php
+include 'common/header.html';
+?>
 
 <body>
     <!--Barra di navigazione-->
@@ -32,6 +23,8 @@
           </div>
         </div>
       </nav>
+      <main role="main" class="container">
+		<div class="jumbotron">
     <header>
         <!--LogoICT-->
         <a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
@@ -40,9 +33,8 @@
         <p id="p01"><a href="login.html.php" title="internal link">Torna alla pagina di login</a></p>
     </header>
     <br><br><br><br><br>
-    <footer>
-        <p id="p04">&copy; Copyright 2021. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-    </footer>
-</body>
-
-</html>
+    </div>
+      </main>
+    <?php
+	include 'common/footer.html';
+	?>

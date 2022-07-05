@@ -7,18 +7,9 @@ if(empty($user)){
     exit;
 }
 ?>
-    <!DOCTYPE html>
-    <html lang="it-IT">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Tempo libero: eventi culturali e sportivi per studenti">
-        <meta name="keywords" content="Eventi, attività, cultura, sport, tempo libero, studenti.">
-        <meta name="author" content="Alessia Aniceto">
-        <title>Cerca eventi</title>
-        <link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    </head>
+<?php
+include 'common/header.html';
+?>
 
     <body>
         <!--Barra di navigazione-->
@@ -32,7 +23,7 @@ if(empty($user)){
         <header>
             <br>
             <!--LogoICT-->
-            <a href="home.html"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
+            <a href="home.html.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
             <!--Titolo-->
         </header>
 
@@ -44,9 +35,6 @@ if(empty($user)){
                 </form>
             </div>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <footer>
-                <p id="p04">&copy; Copyright 2020. Tutti i diritti riservati.<br><b>Powered by Alessia Aniceto</b></p>
-            </footer>
-        </body>
-
-    </html>
+            <?php
+	include 'common/footer.html';
+	?>

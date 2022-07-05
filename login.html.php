@@ -34,7 +34,6 @@ include 'common/header.html';
 		</div>
 	</nav>
 
-
 	<main role="main" class="container">
 		<div class="jumbotron">
 			<header>
@@ -56,7 +55,7 @@ include 'common/header.html';
 						<input type="submit" value="Entra!">
 					</fieldset>
 				</form>
-				<p id="p01">Sei un nuovo utente?<br><a href="registration.html"><b>Registrati!</b></a></p>
+				<p id="p01">Sei un nuovo utente?<br><a href="registration.html.php"><b>Registrati!</b></a></p>
 			</div>
 		</div>
 	</main>
