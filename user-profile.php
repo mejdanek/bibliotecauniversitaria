@@ -11,11 +11,11 @@ include 'common/header.html';
 ?>
 
 <body>
-	<!--Barra di navigazione-->
+	<!--Nav Bar-->
 	<nav>
 		<ul id="menu">
 			<li><a href="home.php">Home</a></li>
-			<li><a href="user-search-events.html.php">Cerca eventi</a></li>
+			<li><a href="user-search-events.html.php">Cerca i libri</a></li>
 			<li style="float:right"><a class="active" href="user-profile.php">Pagina Utente</a></li>
 		</ul>
 	</nav>

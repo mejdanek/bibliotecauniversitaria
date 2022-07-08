@@ -12,7 +12,7 @@ include 'common/header.html';
 ?>
 
     <body>
-        <!--Barra di navigazione-->
+        <!--Nav Bar-->
         <nav>
             <ul id="menu">
                 <li><a href="home.php">Home</a></li>
@@ -29,7 +29,7 @@ include 'common/header.html';
 
         <body>
             <div id="center">
-                <h1> Nessun evento trovato!</h1><br><br>
+                <h1> Nessun libro trovato!</h1><br><br>
                 <form action="user-search-events.html.php" method="post" name="back">
                     <input type="submit" value="Torna indietro e cerca ancora!">
                 </form>

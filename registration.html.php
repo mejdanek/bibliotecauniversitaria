@@ -17,8 +17,8 @@ include 'common/header.html';
 
 
 <body>
-    <!--Barra di navigazione-->
-    <!--Barra di navigazione-->
+    <!--Nav Bar-->
+    <!--Nav Bar-->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <div class="container">
           <div class="collapse navbar-collapse">

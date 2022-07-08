@@ -3,7 +3,7 @@ include 'common/header.html';
 ?>
 
 <body>
-	<!--Barra di navigazione-->
+	<!--Nav Bar-->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
 		<div class="container">
 		  <div class="collapse navbar-collapse">
@@ -31,7 +31,7 @@ include 'common/header.html';
 		<!--Titolo-->
 		<h1>Accedi ai servizi</h1><br><br><br>
 	</header>
-	<!--Immagine destra-->
+	<!--Immagine dx-->
 	<div id="right"><img src="images/chiave.png" alt="chiave" title="Login" width="190"></div><br><br><br><br><br>
 	<!--Inizio form-->
 	<div id="center">

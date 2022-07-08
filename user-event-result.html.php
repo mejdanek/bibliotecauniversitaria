@@ -17,7 +17,7 @@ include 'common/header.html';
 ?>
 
 <body>
-	<!--Barra di navigazione-->
+	<!--Nav Bar-->
 	<nav>
 		<ul id="menu">
 			<li><a href="home.php">Home</a></li>

@@ -180,25 +180,25 @@ include 'common/header.html';
 				<!--Titolo-->
 				<h1>Admin Area di <?php echo $adminuser ?></h1>
 			</header><br><br><br><br>
-			<!--Immagine destra-->
+			<!--Immagine destra-->  
 			<div id="right">
 				<img src="images/admin.png" alt="admin" title="Admin" width="190">
 			</div><br>
 			<!--Inizio form-->
 			<div id="center">
 				<fieldset>
-					<h2>Cerca eventi</h2><br>
+					<h2>Cerca i libri</h2><br>  
 					<div id="search-row">
 						<form id="search-form" method="post" name="search-form">
 							<input type="text" name="search" placeholder="Cerca...">
 							<input type="image" src="images/search.png" value="Cerca" id="search-button">
 						</form>
 						<form id='read-all' name='read-all'>
-							<input type='submit' value='Mostra tutti gli eventi'>
+							<input type='submit'  value='Mostra tutti i libri'>  <!--mostra tutti gli eventi in precedenza-->
 						</form>
 					</div>
 					<br><br>
-					<div id="eventi"></div><br><br>
+					<div id="libri"></div><br><br>  <!--eventi in precedenza-->
 				</fieldset>
 				<br>
 

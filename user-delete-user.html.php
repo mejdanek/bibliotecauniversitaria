@@ -3,7 +3,7 @@ include 'common/header.html';
 ?>
 
 <body>
-	<!--Barra di navigazione-->
+	<!--Nav Bar-->
 	<nav>
 		<ul id="menu">
 			<li><a href="index.php">Home</a></li>

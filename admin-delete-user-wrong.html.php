@@ -20,11 +20,12 @@ include 'common/header.html';
                     success: function(response) { // response = lista di eventi (array di oggetti JSON)
                         html_table = `<table id='center'>
 						<tr>
-							<th>Nome</th>
+							<th>Nome</th> 
 							<th>Città</th>
 							<th>Tipo</th>
 							<th></th>
-						</tr>`;
+							
+						</tr>`; 
                         for (i = 0; i < response.evento.length; i++) {
                             nome = response.evento[i].nome;
                             citta = response.evento[i].citta;
@@ -144,8 +145,8 @@ include 'common/header.html';
     </script>
 
 <body>
-    <!--Barra di navigazione-->
-    <!--Barra di navigazione-->
+    <!--Nav Bar-->
+    <!--Nav Bar-->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
       <div class="container">
         <div class="collapse navbar-collapse">
@@ -180,29 +181,32 @@ include 'common/header.html';
     <!--Inizio form-->
     <div id="center">
         <fieldset>
-            <h2>Cerca eventi</h2><br>
+            <h2>Cerca libri</h2><br>
             <div id="search-row">
                 <form id="search-form" method="post" name="search-form">
                     <input type="text" name="search" placeholder="Cerca...">
                     <input type="image" src="images/search.png" value="Cerca" id="search-button">
                 </form>
                 <form id='read-all' name='read-all'>
-                    <input type='submit' value='Mostra tutti gli eventi'>
+                    <input type='submit' value='Mostra tutti i libri'>
                 </form>
             </div>
             <br><br>
-            <div id="eventi"></div><br><br>
+            <div id="libri"></div><br><br>
         </fieldset>
         <br>
 
         <fieldset>
-            <h2>Aggiungi evento</h2><br>
-            <form id="creaevento" method="post" name="aggiungieventi">
-                <label for="nome"><b>Nome Evento</b></label><br>
-                <input type="text" name="nome" placeholder="Nome Evento" required><br><br>
-                <label for="citta"><b>Città Evento</b></label><br>
-                <input type="text" name="citta" placeholder="Città Evento" required><br><br>
-                <label for="tipo"><b>Tipo Evento</b></label><br>
+            <h2>Aggiungi libro</h2><br>
+            <form id="crealibro" method="post" name="aggiungilibro">
+                         <label for="titolo"><b>Titolo libro</b></label><br>
+						<input type="text" name="titolo" placeholder="Inserire titolo" required><br><br>
+						<label for="autore"><b>Autore libro</b></label><br>
+						<input type="text" name="autore" placeholder="Inserire autore" required><br><br>
+						<label for="editore"><b>Editore libro</b></label><br>
+						<input type="text" name="editore" placeholder="Inserire editore" required><br><br>
+						<label for="isbn"><b>Codice ISBN</b></label><br>
+						<input type="text" name="isbn" placeholder="Inserire ISBN" required><br><br>
                 <select name="tipo" id="tipo" required>
                     <option hidden disabled selected value> -- seleziona un'opzione -- </option>
                     <option value="Concerti">Concerti</option>

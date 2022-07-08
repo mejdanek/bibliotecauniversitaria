@@ -30,19 +30,22 @@ include 'common/header.html';
                 <!--LogoICT-->
                 <a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
                 <!--Titolo-->
-                <h1>Tempo libero: cultura e sport per studenti</h1><br><br><br>
+                <h1>Biblioteca universitaria: cultura e studio per tutti gli studenti</h1><br><br><br>
             </header>
             <!--Immagine Torino-->
             <div id="center"><br><br>
             </div>
             <div id="main">
                 <!--Inizio contenuto della pagina-->
-                <p id="p01">Cosa si intende per <strong>"tempo libero"</strong>?<br> Nell'accezione più ampia del termine si intendono tutte le attività ricreative scelte per <b>passione</b>; è implicito il legame con il concetto di <b>cura di sé</b>, con la sfera della
-                    <b>socializzazione</b>, del
-                    <b>divertimento</b>, della <b>conoscenza</b> e dell’<b>informazione</b>.<br><br> Il <b>2021</b> vedrà una Torino sempre più viva e dinamica. Il <b>programma</b> delle iniziative realizzato dalla Città e da Enti, Associazioni, Fondazioni e
-                    soggetti privati sarà infatti ricco di appuntamenti che toccheranno, nel corso dell’anno, diversi settori: dalla <b>cultura</b> al <b>turismo</b>, dallo <b>sport</b> alle <b>nuove tecnologie</b> e molto altro ancora.
-                    <br> Per saperne di più, visita il sito: <a href="https://www.guidatorino.com/eventi-torino-oggi/" title="external link" target="_blank">"Torino Eventi 2021"</a>.<br><br> Per conoscere <b>opportunità</b> e <b>agevolazioni</b> offerte agli
-                    studenti di <strong>Torino</strong>, puoi visitare la pagina <a href="https://www.unito.it/servizi/lo-sport-cultura-e-tempo-libero" title="external link" target="_blank">"Per lo sport, cultura e tempo libero"</a>.<br><br>
+                <p id="p01"> Vi presentiamo la  <strong>"biblioteca universitaria"</strong>?<br>La Biblioteca Universitaria offre un servizio per tutti gli studenti dell'Università di Torino che hanno 
+            bisogno di reperire testi, materiale per la preparazione dei loro esami oppure della loro tesi.<br><br>
+			Quello che ci contraddistingue è la passione per i libri e prenderci cura di loro. Il nostro obiettivo
+            è quello di offrire un servizio che possa soddisfare tutti gli studenti ed inoltre metteremo a disposizione
+            le aree comuni per far si che tutti i ragazzi possano studiare direttamente nella biblioteca con i loro compagni di corso.
+            Gli studenti potranno così incrementare le loro sfera della conoscenza, socializzazione, informazione e divertimento.
+            Per conoscere <b>opportunità </b>, <b>agevolazioni</b> e le <b>offerte rivolte agli studenti</b> di Torino
+            è possibile visitare il nostro sito: <a href="https://www.unito.it/ateneo/strutture-e-sedi/strutture/biblioteche" title="external link" target="_blank">"Biblioteca Universitaria"</a>. <br> <br>
+			
                 </p>
             </div>
         </div>

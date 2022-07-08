@@ -12,7 +12,7 @@ if (empty($user)) { // se la variabile di sessione è vuota
 include 'common/header.html';
 ?>
 
-<!--Barra di navigazione-->
+<!--Nav Bar-->
 <nav>
 	<ul id="menu">
 		<li><a href="home.php">Home</a></li>
