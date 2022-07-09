@@ -89,6 +89,7 @@ class Libro
 		$stmt->bindParam(1, $keywords);
 		$stmt->bindParam(2, $keywords);
 		$stmt->bindParam(3, $keywords);
+		$stmt->bindParam(4, $keywords);
 
 		// eseguo la query
 		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)

@@ -19,7 +19,7 @@ include 'common/header.html';
 			$.ajax({
 				url: "http://localhost/bibliotecauniversitaria/rest/read.php", // specifica l'URL a cui inviare la richiesta
 				type: "GET", // specifica il titolo di richiesta
-				success: function(response) { // response = lista di eventi (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
+				success: function(response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
 					// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
 					html_table = `<table id='center'>
 						<tr>
@@ -40,7 +40,7 @@ include 'common/header.html';
 						html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td> " +giacenza + "</td><td><input type='image' class='delete-button' src='images/cestino.png' value='" + id_delete + "'></td></tr>";
 					}
 					html_table += "</table>";
-					$("#libri").html(html_table); // inserisco la tabella degli eventi nel div #eventi
+					$("#libri").html(html_table); // inserisco la tabella degli libri nel div #libri
 					$(".delete-button").on("click", on_delete); // all'on click del cestino parte la funzione on_delete()
 					$("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
 				},
@@ -74,7 +74,7 @@ include 'common/header.html';
 					success: function(response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
 						// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
 						alert("libri eliminato!");
-						on_read(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli eventi 
+						on_read(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli libri 
 					},
 					error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
 						// stampo l'errore sulla console
@@ -91,22 +91,23 @@ include 'common/header.html';
 			$.ajax({
 				url: "http://localhost/bibliotecauniversitaria/rest/search.php?s=" + s_search, // specifica l'URL a cui inviare la richiesta
 				type: "GET", // specifica il autore di richiesta
-				success: function(response) { // response = lista di eventi (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
+				success: function(response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
 					// della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
 					html_table = `<table id='center'>
 						<tr>
-							<th>Nome</th>
-							<th>Città</th>
-							<th>autore</th>
-							<th></th>
+							<th>ISBN</th>
+							<th>Titolo</th>
+							<th>Autore</th>
+							<th>Editore</th>
+							<th>Giacenza</th>
 						</tr>`;
-					if (response.eventi.length > 0) { // se la response restituisce qualche libri
-						for (i = 0; i < response.eventi.length; i++) { // ciclo for sull'array response
-							nome = response.eventi[i].nome; // prendo i valori delle proprietà di ogni singolo libri
-							citta = response.eventi[i].citta;
-							autore = response.eventi[i].autore;
-							id_delete = response.eventi[i].id;
-							html_table += "<tr><td>" + nome + "</td><td> " + citta + "</td><td> " + autore + "</td><td><input type='image' class='delete-button' src='images/cestino.png' value='" + id_delete + "'></td></tr>";
+					if (response.libri.length > 0) { // se la response restituisce qualche libri
+						for (i = 0; i < response.libri.length; i++) { // ciclo for sull'array response
+							titolo = response.libri[i].titolo; // prendo i valori delle proprietà di ogni singolo libri
+							autore = response.libri[i].autore;
+							editore = response.libri[i].editore;
+							id_delete = response.libri[i].isbn;
+							html_table += "<tr><td>" + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td><input type='image' class='delete-button' src='images/cestino.png' value='" + id_delete + "'></td></tr>";
 						}
 					} else {
 						html_table += `<tr>
@@ -114,7 +115,7 @@ include 'common/header.html';
 							</tr>`;
 					}
 					html_table += "</table>";
-					$("#eventi").html(html_table); // inserisco la tabella nel div #eventi
+					$("#libri").html(html_table); // inserisco la tabella nel div #libri
 					$(".delete-button").on("click", on_delete); // all'on click del cestino parte la funzione on_delete()
 					$("#read-all").on("submit", on_read); // all'on submit dell pulsante #read-all parte la funzione on_read()
 				},
@@ -198,11 +199,11 @@ include 'common/header.html';
 							<input type="image" src="images/search.png" value="Cerca" id="search-button">
 						</form>
 						<form id='read-all' name='read-all'>
-							<input type='submit'  value='Mostra tutti i libri'>  <!--mostra tutti gli eventi in precedenza-->
+							<input type='submit'  value='Mostra tutti i libri'>  <!--mostra tutti gli libri in precedenza-->
 						</form>
 					</div>
 					<br><br>
-					<div id="libri"></div><br><br>  <!--eventi in precedenza-->
+					<div id="libri"></div><br><br>  <!--libri in precedenza-->
 				</fieldset>
 				<br>
 
