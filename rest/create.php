@@ -1,4 +1,4 @@
-<?php
+        <?php
 //stabilisco i permessi di lettura del file (anyone)
 header("Access-Control-Allow-Origin: *");
 // definisco il formato della risposta (json)
@@ -7,34 +7,28 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
 // includo le classi per la gestione dei dati
-include_once '../classes/Database.php';
-include_once '../classes/Libro.php';
+include_once $_SERVER["DOCUMENT_ROOT"].'/bibliotecauniversitaria/classes/Database.php';
+include_once $_SERVER["DOCUMENT_ROOT"].'/bibliotecauniversitaria/classes/Libro.php';
 
 // creo una connessione al DBMS
 $database = new Database();
 $db = $database->getConnection();
 
-// creo un'istanza di Evento
+// creo un'istanza di libro
 $libro = new Libro($db);
 
 // leggo i dati nel body della request (metodo POST)
-$data = json_decode(file_get_contents("php://input"));
+$data = json_decode(file_get_contents('php://input'));
 
-// controllo se i dati ci siano
-if (
-    !empty($data->titolo) &&
-    !empty($data->autore) &&
-    !empty($data->editore) &&
-    !empty($data->isbn)
-
-) {
-    // inserisco i valori nelle variabili d'istanza dell'oggetto $evento
+// controllo che i dati ci siano
+if (!empty($data->titolo) && !empty($data->autore) && !empty($data->editore) && !empty($data->isbn)) {
+    // inserisco i valori nelle variabili d'istanza dell'oggetto $libro
     $libro->titolo = $data->titolo;
     $libro->autore = $data->autore;
     $libro->editore = $data->editore;
     $libro->isbn = $data->isbn;
 
-    // invoco il metodo create() che crea un nuovo evento
+    // invoco il metodo create() che crea un nuovo libro
     if ($libro->create()) { // se va tutto bene
         http_response_code(201); //  creato
         // creo un oggetto JSON costituito dalla coppia message -> testo del messaggio

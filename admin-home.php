@@ -68,7 +68,7 @@ include 'common/header.html';
 			conf = confirm("Sei sicuro di voler eliminare questo libri?"); // finestra di dialogo per confermare la cancellazione di un libri
 			if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
 				$.ajax({
-					url: "http://localhost/bibliotecauniversitaria/rest/delete.php?id=" + event.target.value, // specifica l'URL a cui inviare la richiesta
+					url: "http://localhost/bibliotecauniversitaria/rest/delete.php?isbn=" + event.target.value, // specifica l'URL a cui inviare la richiesta
 					type: "DELETE", // specifica il autore di richiesta
 					contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
 					success: function(response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
