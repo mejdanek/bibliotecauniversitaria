@@ -18,6 +18,7 @@ $stmt = $libro->read();
 
 // lista di libri da riempire
 $libri_list = array();
+$libri_list['libri'] = array();
 
 // se vengono trovati libri nel database
 if ($stmt->rowCount() > 0) { 
@@ -31,7 +32,7 @@ if ($stmt->rowCount() > 0) {
             "giacenza" => $riga['giacenza']
         );
         // aggiungi questa riga nella lista di tutti i libri
-        array_push($libri_list, $libro_item);
+        array_push($libri_list['libri'], $libro_item);
     }
     // mostra la lista dei libri
     echo json_encode($libri_list);

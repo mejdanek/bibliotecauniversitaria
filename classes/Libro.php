@@ -58,7 +58,7 @@ class Libro
 	function delete()
 	{
 		// cancello il libro con l'isbn indicato
-		$query = "DELETE FROM eventi WHERE isbn = ?";
+		$query = "DELETE FROM libri WHERE isbn = ?";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 		// sanifico
