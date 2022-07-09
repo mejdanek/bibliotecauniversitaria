@@ -25,7 +25,7 @@ if ($stmt->rowCount() == 0) { // se non ci sono righe (non ci sono utenti)
 	VALUES ('$user', '$pwd', '$nome', '$cognome', '$genere', '$tipo', '$somma', '$universita')"; // inserisco nella tabella utenti i dati inseriti dall'utente
 		$stmt = $conn->prepare($sql2);
 		$stmt->execute();
-		include_once 'registration-complete.html'; // includo la pagina di registrazione compeltata
+		include_once 'registration-ok.html'; // includo la pagina di registrazione compeltata
 	} else {
 		include_once 'registration-wrong.html'; // altrimenti includo la pagina di errore
 	}

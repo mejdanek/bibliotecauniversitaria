@@ -5,7 +5,7 @@ class Database
 
     public function getConnection()
     {
-        $string = file_get_contents("config/database.json");
+        $string = file_get_contents($_SERVER["DOCUMENT_ROOT"]."/bibliotecauniversitaria/config/database.json");
         $json = json_decode($string, true);
 
         $this->conn = null;
