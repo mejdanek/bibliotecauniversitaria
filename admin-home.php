@@ -53,8 +53,6 @@ include 'common/header.html';
 		}
 		on_read(); // all'apertura della pagina admin-home.php parte la funzione on_read()
 
-
-
 		// delete
 		on_delete = function(event) {
 			/**
@@ -208,13 +206,13 @@ include 'common/header.html';
 				<br>
 
 				<fieldset>
-					<h2>Aggiungi libri</h2><br>
+					<h2>Aggiungi libro</h2><br>
 					<form id="crealibri" method="post" name="aggiungilibri">
-						<label for="titolo"><b>Titolo libri</b></label><br>
+						<label for="titolo"><b>Titolo</b></label><br>
 						<input type="text" name="titolo" placeholder="Inserire titolo" required><br><br>
-						<label for="autore"><b>Autore libri</b></label><br>
+						<label for="autore"><b>Autore</b></label><br>
 						<input type="text" name="autore" placeholder="Inserire autore" required><br><br>
-						<label for="editore"><b>Editore libri</b></label><br>
+						<label for="editore"><b>Editore</b></label><br>
 						<input type="text" name="editore" placeholder="Inserire editore" required><br><br>
 						<label for="isbn"><b>Codice ISBN</b></label><br>
 						<input type="text" name="isbn" placeholder="Inserire ISBN" required><br><br>

@@ -10,6 +10,6 @@ if ($n == 0) { // se non ci sono righe (non ci sono utenti)
 } else {
 	$S2 = "DELETE FROM utenti WHERE username='$user'"; // elimino dalla tabella utenti l'utente con username uguale a quello inserito dall'admin
 	$elimina = mysqli_query($conn, $S2); // eseguo la query
-	include_once 'admin-user-deleted.html'; // includo la pagina di cancellazione effettuata
+	include_once 'admin-user-deleted.html.php'; // includo la pagina di cancellazione effettuata
 }
 db_close($conn); // chiudo la connessione con il ddb

@@ -166,6 +166,8 @@ include 'common/header.html';
         </div>
       </div>
     </nav>
+    <main role="main" class="container">
+		<div class="jumbotron">
     <header>
         <!--LogoICT-->
         <a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
@@ -249,7 +251,9 @@ include 'common/header.html';
             </form>
         </div>
         <br>
-
+    </div>
+    </main>
+    
 <?php
 include 'common/footer.html';
 ?>

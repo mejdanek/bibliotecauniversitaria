@@ -23,6 +23,8 @@ include 'common/header.html';
 		  </div>
 		</div>
 	  </nav>
+	  <main role="main" class="container">
+        <div class="jumbotron">
 	<header>
 		<!--LogoICT-->
 		<a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo"
@@ -33,6 +35,8 @@ include 'common/header.html';
 		<p id="p01"><a href="admin-home.php" title="internal link">Torna all'Admin Area</a></p>
 	</header>
 	<br><br><br><br><br>
+		</div>
+	  </main>
 	<?php
 	include 'common/footer.html';
 	?>
