@@ -1,6 +1,6 @@
 <?php
 session_start();  // inizio la sessione
-$user = $_SESSION["user"]; // prendo la variabile di sessione
+$matricola = $_SESSION["matricola"]; // prendo la variabile di sessione
 if (empty($user)) { // se la variabile di sessione è vuota
 	header("Location:login.html.php"); // reindirizzo l'utente alla pagina di login
 	exit;

@@ -13,11 +13,11 @@ include 'common/header.html';
                 <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html.php">Login utenti</a>
+                <a class="nav-link" href="login.html.php">Area utenti</a>
               </li>
               <li class="nav-item"><a></a></li>
               <li class="nav-item active">
-                <a class="nav-link" href="admin-login.html.php">Login admin</a>
+                <a class="nav-link" href="admin-login.html.php">Area admin</a>
               </li>
             </ul>
             

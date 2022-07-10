@@ -1,11 +1,11 @@
 <?php
 session_start(); // inizio la sessione
-$user = $_SESSION["user"]; // prendo le variabili di sessione
-if (empty($user)) {  // se la variabile non è stata settata (è vuota)
+$matricola = $_SESSION["matricola"]; // prendo le variabili di sessione
+if (empty($matricola)) {  // se la variabile non è stata settata (è vuota)
 	header("Location:login.html.php"); // reindirizzo l'utente alla pagina di login
 	exit;
 } else {
-	echo "<h2>Benvenuto/a $user!</h2>"; // altrimenti stampo una frase di bevenuto personalizzata
+	echo "<h2>Benvenuto/a $matricola!</h2>"; // altrimenti stampo una frase di bevenuto personalizzata
 }
 ?>
 <?php
@@ -22,17 +22,19 @@ include 'common/header.html';
               <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html.php">Login utenti</a>
+              <a class="nav-link" href="logout.php">Logout (matr. <?php echo $_SESSION['matricola']; ?>)</a>
             </li>
             <li class="nav-item"><a></a></li>
             <li class="nav-item">
-              <a class="nav-link" href="admin-login.html.php">Login admin</a>
+              <a class="nav-link" href="admin-login.html.php">Area admin</a>
             </li>
           </ul>
           
         </div>
       </div>
     </nav>
+    <main role="main" class="container">
+		<div class="jumbotron">
 	<header>
 		<!--LogoICT-->
 		<a href="home.php"><img id="left2" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
@@ -54,6 +56,15 @@ include 'common/header.html';
 			
 		</p>
 	</div>
+  <h2>Clicca qui per effettuare il logout:</h2><br><br>
+				<div id="center">
+					<form action="logout.php" method="post" name="logout">
+						<input type="submit" value="Logout">
+					</form>
+				</div>
+				<br>
+    </div>
+    </main>
 	<?php
 include 'common/footer.html';
 ?>

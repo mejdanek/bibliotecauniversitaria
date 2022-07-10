@@ -1,7 +1,7 @@
 <?php
 //session_start();
-$user=$_SESSION["user"];
-$pwd=$_SESSION["pwd"];
+$user=$_SESSION["matricola"];
+$pwd=$_SESSION["password"];
 if(empty($user)){
 	header("Location:login.html.php");
     exit;

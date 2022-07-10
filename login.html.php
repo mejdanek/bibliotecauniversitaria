@@ -1,8 +1,8 @@
 <?php
 session_start(); // inizio la sessione
-if (isset($_SESSION["user"])) { // se la variabile di sessione è settata
-	$user = $_SESSION["user"]; // prendo la variabile di sessione
-	if (!empty($user)) { // se la variabile di sessione non è vuota
+if (isset($_SESSION["matricola"])) { // se la variabile di sessione è settata
+	$matricola = $_SESSION["matricola"]; // prendo la variabile di sessione
+	if (!empty($matricola)) { // se la variabile di sessione non è vuota
 		header("Location:home.php"); // reindirizzo l'utente alla home
 		exit;
 	}
@@ -22,11 +22,11 @@ include 'common/header.html';
 						<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="login.html.php">Login utenti</a>
+						<a class="nav-link" href="login.html.php">Area utenti</a>
 					</li>
 					<li class="nav-item"><a></a></li>
 					<li class="nav-item">
-						<a class="nav-link" href="admin-login.html.php">Login admin</a>
+						<a class="nav-link" href="admin-login.html.php">Area admin</a>
 					</li>
 				</ul>
 
@@ -49,14 +49,14 @@ include 'common/header.html';
 			<div id="center">
 				<form action="login.php" method="post" name="login">
 					<fieldset><br>
-						<label for="user"><b>Username</b></label><br>
-						<input type="text" id="user" name="user" placeholder="Username" required><br><br>
-						<label for="pwd"><b>Password</b></label><br>
-						<input type="password" id="pwd" name="pwd" placeholder="Password" required><br><br>
+						<label for="matricola"><b>Nr. matricola</b></label><br>
+						<input type="text" id="matricola" name="matricola" placeholder="Nr. matricola" required><br><br>
+						<label for="password"><b>Password</b></label><br>
+						<input type="password" id="password" name="password" placeholder="Password" required><br><br>
 						<input type="submit" value="Entra!">
 					</fieldset>
 				</form>
-				<p id="p01">Sei un nuovo utente?<br><a href="registration.html"><b>Registrati!</b></a></p>
+				<p id="p01">Sei un nuovo utente?<br><a href="registration.html.php"><b>Registrati!</b></a></p>
 			</div>
 		</div>
 	</main>

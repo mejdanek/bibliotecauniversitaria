@@ -2,7 +2,7 @@
 session_start(); // inizio la sessione
 include_once 'db-connect-db-close.php'; // includo il file di connessione e di chiusura del db
 $conn = db_connect(); // mi connetto al db
-$pwd = $_SESSION["pwd"]; // prendo le variabili di sessione
+$pwd = $_SESSION["password"]; // prendo le variabili di sessione
 $deletepwd = mysqli_real_escape_string($conn, $_POST["delete-pwd"]); // prendo le variabili inserite dall'utente, , eseguendo l'escape dei caratteri speciali
 if ($pwd == $deletepwd) { // se la password dell'utente corrisponde alla password inserita 
 	$S = "SELECT * FROM utenti WHERE password='$pwd'"; // seleziono tutte le colonne dalla tabella utenti in cui la password corrisponde alla password dell'utente

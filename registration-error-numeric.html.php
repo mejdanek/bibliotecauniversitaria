@@ -2,7 +2,7 @@
 include 'common/header.html';
 ?>
     <script>
-        jQuery(document).ready(function() { // il codice incluso verrà eseguito solo quando la pagina DOM è pronta per l'esecuzione del codice JavaScript
+        $(function() { // il codice incluso verrà eseguito solo quando la pagina DOM è pronta per l'esecuzione del codice JavaScript
             $("#registration-form").on("submit", function() { // al submit del form
                 var checkedArray = $("input[type='checkbox']:checked"); // prendo le checkbox selezionate e le inserisco in un array
                 var somma = 0; // inizializzo una variabile a 0
@@ -26,11 +26,11 @@ include 'common/header.html';
                 <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="login.html.php">Login utenti</a>
+                <a class="nav-link" href="login.html.php">Area utenti</a>
               </li>
               <li class="nav-item"><a></a></li>
               <li class="nav-item">
-                <a class="nav-link" href="admin-login.html.php">Login admin</a>
+                <a class="nav-link" href="admin-login.html.php">Area admin</a>
               </li>
             </ul>
             

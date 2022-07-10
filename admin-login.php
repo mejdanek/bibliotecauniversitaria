@@ -6,7 +6,7 @@ $database = new Database();
 $conn = $database->getConnection();
 
 $adminuser = $_POST['adminuser'];
-$adminpwd = $_POST['adminpwd'];
+$adminpwd = md5($_POST['adminpwd']);
 
 $sql = "SELECT username, password FROM admin WHERE username='$adminuser' AND password='$adminpwd'"; // seleziono dalla tabella admin la colonna username e password in cui i dati corrispondono a quelli dell'utente
 
