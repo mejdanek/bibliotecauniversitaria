@@ -31,9 +31,7 @@ include 'common/header.html';
                    <img src="images/sfondo2.png"  alt="immagine di intestazione pagina" class="d-block w-100"/>
                
               </header>
-            <!--Immagine Torino-->
-            <div id="center"><br><br>
-            </div>
+           
             <div id="main">
                 <!--Inizio contenuto della pagina-->
                 <p id="p01"> Vi presentiamo la  <strong>"biblioteca universitaria"</strong>?<br>La Biblioteca Universitaria offre un servizio per tutti gli studenti dell'Università di Torino che hanno 
