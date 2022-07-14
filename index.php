@@ -27,14 +27,11 @@ include 'common/header.html';
     <main role="main" class="container">
         <div class="jumbotron">
             <header>
-                <!--LogoICT-->
-                <a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
-                <!--Titolo-->
-                <h1>Biblioteca universitaria: cultura e studio per tutti gli studenti</h1><br><br><br>
-            </header>
-            <!--Immagine Torino-->
-            <div id="center"><br><br>
-            </div>
+                <!-- immagine intestazione e titolo-->
+                   <img src="images/sfondo2.png"  alt="immagine di intestazione pagina" class="d-block w-100"/> <br><br>
+               
+              </header>
+           
             <div id="main">
                 <!--Inizio contenuto della pagina-->
                 <p id="p01"> Vi presentiamo la  <strong>"biblioteca universitaria"</strong>?<br>La Biblioteca Universitaria offre un servizio per tutti gli studenti dell'Università di Torino che hanno 
