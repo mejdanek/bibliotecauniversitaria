@@ -28,7 +28,7 @@ include 'common/header.html';
         <div class="jumbotron">
             <header>
                 <!-- immagine intestazione e titolo-->
-                   <img src="images/sfondo2.png"  alt="immagine di intestazione pagina" class="d-block w-100"/>
+                   <img src="images/sfondo2.png"  alt="immagine di intestazione pagina" class="d-block w-100"/> <br><br>
                
               </header>
            
