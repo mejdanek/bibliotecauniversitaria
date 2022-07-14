@@ -22,7 +22,7 @@ $stmt->execute();
 
 if ($stmt->rowCount() == 0) { // se non ci sono righe (non ci sono utenti)
 		$sql2 = "INSERT INTO utenti(matricola, email, password, nome, cognome, genere)
-	VALUES ('$matricola', '$email', '$password', '$nome', '$cognome', '$genere')"; // inserisco nella tabella utenti i dati inseriti dall'utente
+	VALUES ('$matricola', '$email', MD5('$password'), '$nome', '$cognome', '$genere')"; // inserisco nella tabella utenti i dati inseriti dall'utente
 		$stmt = $conn->prepare($sql2);
 		$stmt->execute();
 		include_once 'registration-ok.html.php'; // includo la pagina di registrazione compeltata
