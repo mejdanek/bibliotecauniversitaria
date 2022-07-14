@@ -19,7 +19,7 @@ include 'common/header.html';
 				<a class="nav-link" href="admin-login.html.php">Area admin</a>
 			  </li>
 			</ul>
-			
+			xkfudjcrljfhcrljf
 		  </div>
 		</div>
 	  </nav>
