@@ -32,7 +32,7 @@ include 'common/header.html';
 		<!--Titolo-->
 		<h1>Cancellazione effettuata correttamente!<br><br> <img src="images/check.gif" alt="check" title="Check"
 				width="100"></h1><br>
-		<p id="p01"><a href="admin-home.php" title="internal link">Torna all'Admin Area</a></p>
+		<p id="p01"><a href="admin-page.php" title="internal link">Torna all'Admin Area</a></p>
 	</header>
 	<br><br><br><br><br>
 		</div>

@@ -3,7 +3,7 @@ session_start(); // inizio la sessione
 if (isset($_SESSION["adminuser"])) { // se la variabile di sessione è settata
 	$adminuser = $_SESSION["adminuser"]; // prendo la variabile di sessione
 	if (!empty($adminuser)) { // se la variabile di sessione non è vuota
-		header("Location:admin-home.php"); // reindirizzo l'admin alla admin-home
+		header("Location:admin-page.php"); // reindirizzo l'admin alla admin-home
 		exit;
 	}
 }

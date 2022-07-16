@@ -51,7 +51,7 @@ include 'common/header.html';
 			});
 			return false; // necessario per far funzionare l'on submit (senza parte la request legata all'attributo href)
 		}
-		on_read(); // all'apertura della pagina admin-home.php parte la funzione on_read()
+		on_read(); // all'apertura della pagina admin-page.php parte la funzione on_read()
 
 		// delete
 		on_delete = function(event) {
@@ -187,6 +187,13 @@ include 'common/header.html';
 			<div id="right">
 				<img src="images/admin.png" alt="admin" title="Admin" width="190">
 			</div><br>
+			<p>Benvenuto <b>Amministratore</b></p><br><br>
+				<div id="center">
+					<form action="admin-logout.php" method="post" name="logout">
+						<input type="submit" value="Logout">
+					</form>
+				</div>
+				<br>
 			<!--Inizio form-->
 			<div id="center">
 				<fieldset>
@@ -243,13 +250,7 @@ include 'common/header.html';
 				</fieldset>
 				<br>
 
-				<h2>Clicca qui per effettuare il logout:</h2><br><br>
-				<div id="center">
-					<form action="admin-logout.php" method="post" name="logout">
-						<input type="submit" value="Logout">
-					</form>
-				</div>
-				<br>
+				
 			</div>
 	</main>
 

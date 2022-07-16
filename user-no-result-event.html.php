@@ -15,7 +15,7 @@ include 'common/header.html';
         <!--Nav Bar-->
         <nav>
             <ul id="menu">
-                <li><a href="home.php">Home</a></li>
+                <li><a href="user-page.php">Home</a></li>
                 <li><a class="active" href="user-search-events.html.php">Cerca eventi</a></li>
                 <li style="float:right"><a href="user-profile.php">Pagina Utente</a></li>
             </ul>

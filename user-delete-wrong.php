@@ -14,7 +14,7 @@ include 'common/header.html';
 	<!--Nav bar-->
 	<nav>
 		<ul id="menu">
-			<li><a href="home.php">Home</a></li>
+			<li><a href="user-page.php">Home</a></li>
 			<li><a href="user-search-events.html.php">Cerca eventi</a></li>
 			<li style="float:right"><a class="active" href="user-profile.php">Pagina Utente</a></li>
 		</ul>
@@ -22,7 +22,7 @@ include 'common/header.html';
 	<header>
 		<br>
 		<!--LogoICT-->
-		<a href="home.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
+		<a href="user-page.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
 		<!--Titolo-->
 		<h1>Il tuo profilo</h1><br><br>
 		<!--Immagine destra-->

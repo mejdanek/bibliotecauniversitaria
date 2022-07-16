@@ -29,7 +29,7 @@ include 'common/header.html';
         <a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
         <!--Titolo-->
         <h1>Modifica username effettuata correttamente!<br><br> <img src="images/check.gif" alt="check" title="Check" width="100"></h1><br>
-        <p id="p01"><a href="admin-home.php" title="internal link">Torna all'Admin Area</a></p>
+        <p id="p01"><a href="admin-page.php" title="internal link">Torna all'Admin Area</a></p>
     </header>
     <br><br><br><br><br>
     <?php

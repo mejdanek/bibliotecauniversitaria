@@ -3,7 +3,7 @@ session_start(); // inizio la sessione
 if (isset($_SESSION["matricola"])) { // se la variabile di sessione è settata
 	$matricola = $_SESSION["matricola"]; // prendo la variabile di sessione
 	if (!empty($matricola)) { // se la variabile di sessione non è vuota
-		header("Location:home.php"); // reindirizzo l'utente alla home
+		header("Location:user-page.php"); // reindirizzo l'utente alla home
 		exit;
 	}
 }

@@ -18,7 +18,7 @@ if ($stmt->rowCount() == 0) { // se non ci sono righe (non ci sono utenti)
 } else {
 	$_SESSION["adminuser"] = $adminuser; // prendo le variabili di sessione
 	$_SESSION["adminpwd"] = $adminpwd;
-	include_once 'admin-home.php'; // includo il file di admin-home
+	include_once 'admin-page.php'; // includo il file di admin-home
 }
 
 unset($conn);

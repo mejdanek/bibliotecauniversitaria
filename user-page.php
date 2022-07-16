@@ -37,12 +37,12 @@ include 'common/header.html';
             editore = response.libri[i].editore;
             giacenza = response.libri[i].giacenza;
 
-            id_delete = response.libri[i].isbn;
-            html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td> " + giacenza + "</td><td><input type='image' class='delete-button' src='images/cestino.png' value='" + id_delete + "'></td></tr>";
+            id_reserve = response.libri[i].isbn;
+            html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td> " + giacenza + "</td><td><input type='button' class='create-assign-button'  value='" + id_reserve + "'></td></tr>";
           }
           html_table += "</table>";
           $("#libri").html(html_table); // inserisco la tabella degli libri nel div #libri
-          $(".delete-button").on("click", on_delete); // all'on click del cestino parte la funzione on_delete()
+          $(".create-assign-button").on("click", on_bookreserve); // all'on click del cestino parte la funzione on_bookreturn()
           $("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
         },
         error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
@@ -52,7 +52,7 @@ include 'common/header.html';
       });
       return false; // necessario per far funzionare l'on submit (senza parte la request legata all'attributo href)
     }
-    on_read(); // all'apertura della pagina admin-home.php parte la funzione on_read()
+    on_read(); // all'apertura della pagina admin-page.php parte la funzione on_read()
 
     on_read_user = function() {
       $.ajax({
@@ -72,13 +72,14 @@ include 'common/header.html';
             titolo = response.libri[i].titolo;
             autore = response.libri[i].autore;
             editore = response.libri[i].editore;
-            id_delete = response.libri[i].isbn;
-            html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td></tr>";
+            id_return = response.libri[i].isbn;
+            id_reserve = response.libri[i].isbn;
+            html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td><input type='image' class='delete-assign-button' src='images/cestino.png' value='" + id_return + "'></td></tr>";
           
             }
           html_table += "</table>";
           $("#libriutente").html(html_table); // inserisco la tabella degli libri nel div #libri
-          $(".delete-button").on("click", on_delete); // all'on click del cestino parte la funzione on_delete()
+          $(".delete-assign-button").on("click", on_bookreturn); // all'on click del cestino parte la funzione on_bookreturn()
           $("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
         },
         error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
@@ -187,6 +188,54 @@ include 'common/header.html';
       });
       return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
     }
+
+    on_bookreserve = function(){
+      conf = confirm("Sei sicuro di voler prenotare questo libro?"); // finestra di dialogo per confermare la cancellazione di un'assegnazione
+      var formData = {}; // inizializzo un oggetto
+      for (var form of $("#crealibri").serializeArray()) { // ciclo for per creare il body per la POST seguente a partire dai valori presenti nel form
+        // il metodo serializeArray() crea un array di oggetti JavaScript, pronto per essere codificato come stringa JSON
+        formData[form['name']] = form['value'];
+      }
+      $.ajax({
+        url: "http://localhost/bibliotecauniversitaria/rest/create-assign.php", // specifica l'URL a cui inviare la richiesta
+        type: "POST", // specifica il autore di richiesta
+        contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
+        dataType: "json", // il autore di dati previsto dalla risposta del server
+        data: JSON.stringify(formData), // specifica i dati da inviare al server
+        success: function(response) { // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
+          // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
+          alert("Assegnazione confermata!");
+          on_read_user(); // dopo la creazione dell'libri parte la funzione on_read()
+        },
+        error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
+          // stampo l'errore sulla console
+          console.log(xhr, err, exc);
+        }
+      });
+      return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
+    }
+    
+    on_bookreturn = function(){
+      conf = confirm("Sei sicuro di voler eliminare questo libri?"); // finestra di dialogo per confermare la cancellazione di un'assegnazione
+      if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
+        $.ajax({
+          url: "http://localhost/bibliotecauniversitaria/rest/delete_assign.php?isbn=" + event.target.value + "&matricola=" + "<?php echo $matricola; ?>", // specifica l'URL a cui inviare la richiesta
+          type: "DELETE", // specifica il autore di richiesta
+          contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
+          success: function(response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
+            // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
+            alert("libri eliminato!");
+            on_read_user(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli libri 
+          },
+          error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
+            // stampo l'errore sulla console
+            console.log(xhr, err, exc);
+          }
+        });
+        return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
+      }
+    }
+    
     $("#crealibri").on("submit", on_create); // all'on submit del form #crealibri parte la funzione on_create()
   });
 </script>
@@ -216,7 +265,7 @@ include 'common/header.html';
     <div class="jumbotron">
       <header>
         <!--LogoICT-->
-        <a href="home.php"><img id="left2" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
+        <a href="user-page.php"><img id="left2" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
         <!--Titolo-->
         <h1>Biblioteca universitaria: cultura e studio per tutti gli studenti</h1><br><br><br>
       </header>

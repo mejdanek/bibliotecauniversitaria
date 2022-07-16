@@ -19,7 +19,7 @@ if ($stmt->rowCount() == 0) { // se non ci sono righe (non ci sono utenti)
 } else {
 	$_SESSION["matricola"] = $matricola; // prendo le variabili di sessione
 	$_SESSION["password"] = $password;
-	include_once 'home.php'; // includo il file di home
+	include_once 'user-page.php'; // includo il file di home
 }
 
 unset($conn);
