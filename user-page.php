@@ -29,6 +29,7 @@ include 'common/header.html';
 							<th>Autore</th>
 							<th>Editore</th>
 							<th>Giacenza</th>
+              <th>Prenota</th>
 						</tr>`;
           for (i = 0; i < response.libri.length; i++) { // ciclo for per ciclare sull'array
             isbn = response.libri[i].isbn; // prendo i valori delle proprietà di ogni singolo libro
@@ -38,7 +39,7 @@ include 'common/header.html';
             giacenza = response.libri[i].giacenza;
 
             id_reserve = response.libri[i].isbn;
-            html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td> " + giacenza + "</td><td><input type='button' class='create-assign-button'  value='" + id_reserve + "'></td></tr>";
+            html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td> " + giacenza + "</td><td><input type='image' class='create-assign-button' src='images/check.gif' value='" + id_reserve + "'></td></tr>";
           }
           html_table += "</table>";
           $("#libri").html(html_table); // inserisco la tabella degli libri nel div #libri

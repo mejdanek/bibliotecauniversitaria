@@ -223,34 +223,22 @@ include 'common/header.html';
 						<input type="text" name="editore" placeholder="Inserire editore" required><br><br>
 						<label for="isbn"><b>Codice ISBN</b></label><br>
 						<input type="text" name="isbn" placeholder="Inserire ISBN" required><br><br>
+						<label for="giacenza"><b>Nr. copie</b></label><br>
+						<input type="text" name="giacenza" placeholder="Inserire nr.copie" required><br><br>
 						<input type="submit" id="create" value="Aggiungi"><br><br>
 					</form>
 				</fieldset>
 				<br>
 
 				<fieldset>
-					<h2>Elimina Utenti</h2><br>
+					<h2>Elimina utente</h2><br>
 					<form action="admin-delete-user.php" method="post" name="eliminauser">
-						<label for="user"><b>Inserire Username da eliminare:</b></label><br>
-						<input type="text" name="user" placeholder="Inserisci Username da eliminare" required><br><br>
+						<label for="user"><b>Inserire matricola da eliminare:</b></label><br>
+						<input type="text" name="user" placeholder="Inserisci matricola" required><br><br>
 						<input type="submit" value="Elimina Utente"><br><br>
 					</form>
 				</fieldset>
 				<br>
-
-				<fieldset>
-					<h2>Modifica Username</h2><br>
-					<form action="admin-update-user.php" method="post" name="modificauser">
-						<label for="olduser"><b>Vecchio Username</b></label><br>
-						<input type="text" name="olduser" placeholder="Vecchio Username" required><br><br>
-						<label for="newuser"><b>Nuovo Username</b></label><br>
-						<input type="text" name="newuser" placeholder="Nuovo Username" required><br><br>
-						<input type="submit" value="Modifica Username"><br><br>
-					</form>
-				</fieldset>
-				<br>
-
-				
 			</div>
 	</main>
 

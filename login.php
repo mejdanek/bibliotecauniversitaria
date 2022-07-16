@@ -15,7 +15,7 @@ $stmt->execute();
 
 
 if ($stmt->rowCount() == 0) { // se non ci sono righe (non ci sono utenti)
-	include_once 'login-wrong.html'; // includo la pagina di errore
+	include_once 'login-wrong.html.php'; // includo la pagina di errore
 } else {
 	$_SESSION["matricola"] = $matricola; // prendo le variabili di sessione
 	$_SESSION["password"] = $password;

@@ -19,7 +19,7 @@ class Libro
 	function read()
 	{
 		// seleziono tutti gli eventi ordinandoli per il nome in ordine alfabetico
-		$query = "SELECT * FROM libri ORDER BY libri.titolo ASC";
+		$query = "SELECT * FROM libri ORDER BY libri.autore ASC";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 		// eseguo la query
@@ -32,7 +32,7 @@ class Libro
 	{
 		// inserisco il nuovo evento
 		$query = "INSERT INTO libri SET
-				  titolo=:titolo, autore=:autore, editore=:editore, isbn=:isbn";
+				  titolo=:titolo, autore=:autore, editore=:editore, isbn=:isbn, giacenza=:giacenza";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 
@@ -41,12 +41,14 @@ class Libro
 		$this->autore = htmlspecialchars(strip_tags($this->autore));
 		$this->editore = htmlspecialchars(strip_tags($this->editore));
 		$this->isbn = htmlspecialchars(strip_tags($this->isbn));
+		$this->giacenza = htmlspecialchars(strip_tags($this->giacenza));
 
 		// invio i valori del nuovo libro per i parametri
 		$stmt->bindParam(":titolo", $this->titolo);
 		$stmt->bindParam(":autore", $this->autore);
 		$stmt->bindParam(":editore", $this->editore);
         $stmt->bindParam(":isbn", $this->isbn);
+		$stmt->bindParam(":giacenza", $this->giacenza);
 
 		// eseguo la query
 		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)

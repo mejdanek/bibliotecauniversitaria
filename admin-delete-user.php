@@ -1,15 +1,26 @@
 <?php
-include_once 'db-connect-db-close.php'; // includo il file di connessione e di chiusura del db
-$conn = db_connect(); // mi connetto al db
-$user = mysqli_real_escape_string($conn, $_POST["user"]); // prendo la variabile inserita dall'admin, eseguendo l'escape dei caratteri speciali in una stringa
-$S = "SELECT username FROM utenti WHERE username='$user'"; // selezioni dalla tabella utenti l'username che corrisponde all'username dell'utente
-$risultato = mysqli_query($conn, $S); // eseguo la query
-$n = mysqli_num_rows($risultato); // prendo il numero di righe del risultato della query
-if ($n == 0) { // se non ci sono righe (non ci sono utenti)
-	include_once 'admin-delete-user-wrong.html.php'; // includo la pagina di errore
+
+// includi libreria per connessione a database
+include_once $_SERVER["DOCUMENT_ROOT"].'/bibliotecauniversitaria/classes/Database.php';
+
+// crea connessione
+$database = new Database();
+$conn = $database->getConnection();
+
+$user = $_POST['user'];
+$sql = "SELECT matricola FROM utenti WHERE matricola='$user'";
+
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
+if ($stmt->rowCount() > 0) { // se ci sono righe ( ci sono utenti)
+	$sql2 = "DELETE FROM utenti WHERE matricola='$user'";
+	$stmt = $conn->prepare($sql2);
+	$stmt->execute();
+	include_once 'admin-user-deleted.html.php'; // includo la pagina di registrazione compeltata
 } else {
-	$S2 = "DELETE FROM utenti WHERE username='$user'"; // elimino dalla tabella utenti l'utente con username uguale a quello inserito dall'admin
-	$elimina = mysqli_query($conn, $S2); // eseguo la query
-	include_once 'admin-user-deleted.html.php'; // includo la pagina di cancellazione effettuata
+	include_once 'admin-delete-user-wrong.html.php'; // altrimenti includo la pagina di errore
 }
-db_close($conn); // chiudo la connessione con il ddb
+
+unset($conn);
+unset($database);
