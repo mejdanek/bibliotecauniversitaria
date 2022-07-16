@@ -195,29 +195,7 @@ include 'common/header.html';
     }
 
     on_bookreserve = function() {
-      conf = confirm("Sei sicuro di voler prenotare questo libro?"); // finestra di dialogo per confermare la cancellazione di un'assegnazione
-      var formData = {}; // inizializzo un oggetto
-      for (var form of $("#crealibri").serializeArray()) { // ciclo for per creare il body per la POST seguente a partire dai valori presenti nel form
-        // il metodo serializeArray() crea un array di oggetti JavaScript, pronto per essere codificato come stringa JSON
-        formData[form['name']] = form['value'];
-      }
-      $.ajax({
-        url: "http://localhost/bibliotecauniversitaria/rest/create-assign.php", // specifica l'URL a cui inviare la richiesta
-        type: "POST", // specifica il autore di richiesta
-        contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
-        dataType: "json", // il autore di dati previsto dalla risposta del server
-        data: JSON.stringify(formData), // specifica i dati da inviare al server
-        success: function(response) { // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
-          // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-          alert("Assegnazione confermata!");
-          on_read_user(); // dopo la creazione dell'libri parte la funzione on_read()
-        },
-        error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
-          // stampo l'errore sulla console
-          console.log(xhr, err, exc);
-        }
-      });
-      return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
+      
     }
 
     on_bookreturn = function() {
