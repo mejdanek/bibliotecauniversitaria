@@ -27,6 +27,17 @@ class Libro
 		return $stmt;
 	}
 
+	function read_available()
+	{
+		// seleziono tutti gli eventi ordinandoli per il nome in ordine alfabetico
+		$query = "SELECT * FROM libri WHERE giacenza > 0 ORDER BY libri.autore ASC";
+		// preparo la query
+		$stmt = $this->conn->prepare($query);
+		// eseguo la query
+		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		return $stmt;
+	}
+
 	// servizio di creazione
 	function create()
 	{

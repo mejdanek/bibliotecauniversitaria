@@ -18,7 +18,7 @@ include 'common/header.html';
     // read
     on_read = function() {
       $.ajax({
-        url: "http://localhost/bibliotecauniversitaria/rest/read.php", // specifica l'URL a cui inviare la richiesta
+        url: "http://localhost/bibliotecauniversitaria/rest/read_available.php", // specifica l'URL a cui inviare la richiesta
         type: "GET", // specifica il titolo di richiesta
         success: function(response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
           // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
@@ -61,27 +61,31 @@ include 'common/header.html';
         type: "GET", // specifica il titolo di richiesta
         success: function(response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
           // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-          html_table = `<table id='center'>
+          if (response.message) {
+            html_table = "<p>Nessun libro in carico</p>";
+          } else {
+            html_table = `<table id='center'>
 						<tr>
 							<th>ISBN</th>
 							<th>Titolo</th>
 							<th>Autore</th>
 							<th>Editore</th>
 						</tr>`;
-          for (i = 0; i < response.libri.length; i++) { // ciclo for per ciclare sull'array
-            isbn = response.libri[i].isbn; // prendo i valori delle proprietà di ogni singolo libro
-            titolo = response.libri[i].titolo;
-            autore = response.libri[i].autore;
-            editore = response.libri[i].editore;
-            id_return = response.libri[i].isbn;
-            id_reserve = response.libri[i].isbn;
-            html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td><input type='image' class='delete-assign-button' src='images/cestino.png' value='" + id_return + "'></td></tr>";
-          
+            for (i = 0; i < response.libri.length; i++) { // ciclo for per ciclare sull'array
+              isbn = response.libri[i].isbn; // prendo i valori delle proprietà di ogni singolo libro
+              titolo = response.libri[i].titolo;
+              autore = response.libri[i].autore;
+              editore = response.libri[i].editore;
+              id_return = response.libri[i].isbn;
+              id_reserve = response.libri[i].isbn;
+              html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td><input type='image' class='delete-assign-button' src='images/cestino.png' value='" + id_return + "'></td></tr>";
+
             }
-          html_table += "</table>";
-          $("#libriutente").html(html_table); // inserisco la tabella degli libri nel div #libri
-          $(".delete-assign-button").on("click", on_bookreturn); // all'on click del cestino parte la funzione on_bookreturn()
-          $("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
+            html_table += "</table>";
+            $("#libriutente").html(html_table); // inserisco la tabella degli libri nel div #libri
+            $(".delete-assign-button").on("click", on_bookreturn); // all'on click del cestino parte la funzione on_bookreturn()
+            $("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
+          }
         },
         error: function(xhr, err, exc) { // error verrà eseguita in caso di errore
           // stampo l'errore sulla console
@@ -190,7 +194,7 @@ include 'common/header.html';
       return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
     }
 
-    on_bookreserve = function(){
+    on_bookreserve = function() {
       conf = confirm("Sei sicuro di voler prenotare questo libro?"); // finestra di dialogo per confermare la cancellazione di un'assegnazione
       var formData = {}; // inizializzo un oggetto
       for (var form of $("#crealibri").serializeArray()) { // ciclo for per creare il body per la POST seguente a partire dai valori presenti nel form
@@ -215,8 +219,8 @@ include 'common/header.html';
       });
       return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
     }
-    
-    on_bookreturn = function(){
+
+    on_bookreturn = function() {
       conf = confirm("Sei sicuro di voler eliminare questo libri?"); // finestra di dialogo per confermare la cancellazione di un'assegnazione
       if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
         $.ajax({
@@ -236,7 +240,7 @@ include 'common/header.html';
         return false; // necessario per far funzionare l'on click (senza parte la request legata all'attributo href)
       }
     }
-    
+
     $("#crealibri").on("submit", on_create); // all'on submit del form #crealibri parte la funzione on_create()
   });
 </script>
@@ -304,11 +308,11 @@ include 'common/header.html';
 
       <fieldset>
         <h2>Cambio password</h2>
-        <form action="admin-update-user.php" method="post" name="modificapassword">
+        <form action="user-change-psw.php" method="post" name="modificapassword">
           <label for="oldpsw"><b>Vecchia password</b></label><br>
-          <input type="text" name="oldpsw" placeholder="Vecchia password" required><br><br>
+          <input type="password" name="oldpsw" placeholder="Vecchia password" required><br><br>
           <label for="newpsw"><b>Nuova password</b></label><br>
-          <input type="text" name="newpsw" placeholder="Nuova password" required><br><br>
+          <input type="password" name="newpsw" placeholder="Nuova password" required><br><br>
           <input type="submit" value="Cambia password"><br><br>
         </form>
       </fieldset>
@@ -317,7 +321,7 @@ include 'common/header.html';
 
       <fieldset>
         <h2>Cambio indirizzo mail</h2>
-        <form action="admin-update-user.php" method="post" name="modificaemail">
+        <form action="user-change-mail.php" method="post" name="modificaemail">
           <label for="oldemail"><b>Vecchio indirizzo</b></label><br>
           <input type="text" name="oldemail" placeholder="Vecchio indirizzo" required><br><br>
           <label for="newemail"><b>Nuovo indirizzo</b></label><br>
