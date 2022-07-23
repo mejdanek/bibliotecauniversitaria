@@ -38,13 +38,9 @@ include 'common/header.html';
 	<main role="main" class="container">
 		<div class="jumbotron">
 			<header>
-				<!--LogoICT-->
-				<a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
 				<!--Titolo-->
 				<h1>Accedi ai servizi</h1><br><br><br>
 			</header>
-			<!--Immagine dx-->
-			<div id="right"><img src="images/chiave.png" alt="chiave" title="Login" width="190"></div><br><br><br><br><br>
 			<!--Inizio form-->
 			<div id="center">
 				<form action="login.php" method="post" name="login">

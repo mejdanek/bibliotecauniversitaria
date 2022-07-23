@@ -28,6 +28,7 @@ include 'common/header.html';
 							<th>Autore</th>
 							<th>Editore</th>
 							<th>Giacenza</th>
+							<th>Rimuovi</th>
 						</tr>`;
 					for (i = 0; i < response.libri.length; i++) { // ciclo for per ciclare sull'array
 						isbn = response.libri[i].isbn; // prendo i valori delle proprietà di ogni singolo libro
@@ -178,21 +179,19 @@ include 'common/header.html';
 	<main role="main" class="container">
 		<div class="jumbotron">
 			<header>
-				<!--LogoICT-->
-				<a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
 				<!--Titolo-->
-				<h1>Admin Area di <?php echo $adminuser ?></h1>
+				<h1>Area di amministrazione sito</h1>
 			</header><br><br><br><br>
-			<!--Immagine destra-->  
-			<div id="right">
-				<img src="images/admin.png" alt="admin" title="Admin" width="190">
-			</div><br>
-			<p>Benvenuto <b>Amministratore</b></p><br><br>
-				<div id="center">
-					<form action="admin-logout.php" method="post" name="logout">
+			<br>
+			
+
+				<div id="utentebenvenuto">
+      <table id="benvenuto">
+      <td><p>Benvenuto <b>Amministratore</b><br><br></b></p></td>
+      <td><form action="admin-logout.php" method="post" name="logout">
 						<input type="submit" value="Logout">
-					</form>
-				</div>
+					</form></td></table>
+</div>
 				<br>
 			<!--Inizio form-->
 			<div id="center">

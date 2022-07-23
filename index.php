@@ -34,14 +34,15 @@ include 'common/header.html';
            
             <div id="main">
                 <!--Inizio contenuto della pagina-->
-                <p id="p01"> Vi presentiamo la  <strong>"biblioteca universitaria"</strong>?<br>La Biblioteca Universitaria offre un servizio per tutti gli studenti dell'Università di Torino che hanno 
-            bisogno di reperire testi, materiale per la preparazione dei loro esami oppure della loro tesi.<br><br>
-			Quello che ci contraddistingue è la passione per i libri e prenderci cura di loro. Il nostro obiettivo
-            è quello di offrire un servizio che possa soddisfare tutti gli studenti ed inoltre metteremo a disposizione
-            le aree comuni per far si che tutti i ragazzi possano studiare direttamente nella biblioteca con i loro compagni di corso.
-            Gli studenti potranno così incrementare le loro sfera della conoscenza, socializzazione, informazione e divertimento.
-            Per conoscere <b>opportunità </b>, <b>agevolazioni</b> e le <b>offerte rivolte agli studenti</b> di Torino
-            è possibile visitare il nostro sito: <a href="https://www.unito.it/ateneo/strutture-e-sedi/strutture/biblioteche" title="external link" target="_blank">"Biblioteca Universitaria"</a>. <br> <br>
+                <p id="p01"> Vi presentiamo la  <strong>"biblioteca universitaria"</strong>.<br>Partendo dai requisiti richiesti, questo progetto è stato sviluppato in linguaggio PHP per la generazione delle pagine, per la connessione al database MySQL e per la gestione della autenticazione utenti.
+                La grafica è stata impostata grazie a Bootstrap effettuando delle modifiche personalizzate. Mentre il comportamento delle pagine è stato reso possibile grazie a JQuery; il contenuto dinamico avviene tramite chiamate Ajax
+                Il sito è anche predisposto per l'interfacciamento REST.<br><br>
+			     Questa applicazione è composta da due aree che sono quella dedicata agli utenti (frontend) e quella dedicata all'amministrazione dei dati del sito (backend). Per entrambe le aree è previsto un accesso con nome utente e password (memorizzati nel database non in chiaro ovvero con pw crittografate).
+                 Una volta effettuato l'accesso nell'area utente sarà possibile visualizzare il relativo numero di matricola, il numero di libri in prestito, controllare la lista di libri disponibili nell'archivio con possibilità di prenotazione immediata.
+                 Dopodichè è possibile effettuare il cambio di password e indirizzo mail dell'utente loggato.
+
+                 Nell'area di amministrazione è invece possibile verificare la lista di tutti i libri presenti nell'archivio ed eventualmente rimuoverli, inserire un nuovo libro (compreso di tutte le sue caratteristiche) ed infine è possibile effettuare la cancellazione di un utente. 
+                 <br> <br>
 			
                 </p>
             </div>

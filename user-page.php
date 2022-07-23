@@ -22,7 +22,7 @@ include 'common/header.html';
         type: "GET", // specifica il titolo di richiesta
         success: function(response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
           // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-          html_table = `<table id='center'>
+          html_table = `<table id='listalibri'>
 						<tr>
 							<th>ISBN</th>
 							<th>Titolo</th>
@@ -70,6 +70,7 @@ include 'common/header.html';
 							<th>Titolo</th>
 							<th>Autore</th>
 							<th>Editore</th>
+              <th>Restituisci</th>
 						</tr>`;
             for (i = 0; i < response.libri.length; i++) { // ciclo for per ciclare sull'array
               isbn = response.libri[i].isbn; // prendo i valori delle proprietà di ogni singolo libro
@@ -247,20 +248,21 @@ include 'common/header.html';
   <main role="main" class="container">
     <div class="jumbotron">
       <header>
-        <!--LogoICT-->
-        <a href="user-page.php"><img id="left2" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
-        <!--Titolo-->
-        <h1>Biblioteca universitaria: cultura e studio per tutti gli studenti</h1><br><br><br>
+      <!--Titolo-->
+        <h1>Benvenuto nell'area utente</h1><br><br><br>
       </header>
-
-      <p>Benvenuto matricola nr. <b><?php echo $matricola; ?></b>
-      <form action="logout.php" method="post" name="logout">
+      <div id="utentebenvenuto">
+      <table id="benvenuto">
+      <td><p >Benvenuto matricola nr. <b><?php echo $matricola; ?></b></p></td>
+      <td><form action="logout.php" method="post" name="logout">
         <input type="submit" value="Logout">
-      </form>
-      </p>
+      </form></td>
+</div>
+      </table>
       <!-- libri in carico all'utente -->
       <h2>I miei libri</h2>
       <div id="libriutente"></div>
+      <br><br>
 
       <!-- tutti i libri disponibili -->
       <h2>Lista libri disponibili</h2>

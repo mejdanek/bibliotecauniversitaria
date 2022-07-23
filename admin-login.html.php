@@ -40,13 +40,9 @@ include 'common/header.html';
 		<div class="jumbotron">
 			<header>
 				<br>
-				<!--LogoICT-->
-				<a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
 				<!--Titolo-->
 				<h1>Admin Area</h1><br><br><br>
 			</header>
-			<!--Immagine destra-->
-			<div id="right"><img src="images/admin.png" alt="admin" title="Admin" width="190"></div><br><br><br>
 			<!--Inizio form-->
 			<div id="center">
 				<form action="admin-login.php" method="post" name="login">
