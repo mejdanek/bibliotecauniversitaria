@@ -35,7 +35,6 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
             url: "http://localhost/bibliotecauniversitaria/rest/read_assign.php?matricola=" + $('#nrmatricola').text(), // specifica l'URL a cui inviare la richiesta
             type: "GET", // specifica il titolo di richiesta
             success: function (response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
-                alert(response.message);
                 // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
                 if (response.message === 'Nessun libro trovato') {
                     html_table = "<p>Nessun libro in carico</p>";
