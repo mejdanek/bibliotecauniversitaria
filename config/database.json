@@ -1,6 +1,6 @@
 {
     "databasehost": "localhost",
-	"sqlusername": "root",
-	"sqlpassword": "",
+	"sqlusername": "biblioteca",
+	"sqlpassword": "biblioteca",
 	"databasename": "biblioteca"
 }

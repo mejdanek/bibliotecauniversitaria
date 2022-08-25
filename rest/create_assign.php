@@ -20,10 +20,8 @@ $data = json_decode(file_get_contents('php://input'));
 
 // controllo che i dati ci siano
 if (!empty($data->matricola) && !empty($data->isbn)) {
-    // inserisco i valori nelle variabili d'istanza dell'oggetto $ass
-    $ass->matricola = $data->$matricola;
     $ass->isbn = $data->isbn;
-
+    $ass->matricola = $data->matricola;
     // invoco il metodo create() che crea un nuovo libro
     if ($ass->create()) { // se l'inserimento va a buon fine
         http_response_code(201); // la risposta è ok (201 = Created)
