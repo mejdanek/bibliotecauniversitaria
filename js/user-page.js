@@ -30,14 +30,16 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
         return false; // necessario per far funzionare l'on submit (senza parte la request legata all'attributo href)
     }
 
-    on_read_user = function (matricola) {
+    on_read_user = function () {
         $.ajax({
-            url: "http://localhost/bibliotecauniversitaria/rest/read_assign.php?matricola=" + matricola, // specifica l'URL a cui inviare la richiesta
+            url: "http://localhost/bibliotecauniversitaria/rest/read_assign.php?matricola=" + $('#nrmatricola').text(), // specifica l'URL a cui inviare la richiesta
             type: "GET", // specifica il titolo di richiesta
             success: function (response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
+                alert(response.message);
                 // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-                if (response.message) {
+                if (response.message === 'Nessun libro trovato') {
                     html_table = "<p>Nessun libro in carico</p>";
+                    $("#libriutente").html(html_table);
                 } else {
                     html_table = "<table id='center'><tr><th>ISBN</th><th>Titolo</th><th>Autore</th><th>Editore</th><th>Restituisci</th></tr>";
                     for (i = 0; i < response.libri.length; i++) { // ciclo for per ciclare sull'array
@@ -119,16 +121,17 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
     }
 
     on_bookreserve = function (event) {
-        conf = confirm("Sei sicuro di voler prenotare questo libro?"); // finestra di dialogo per confermare la cancellazione di un libri
+        conf = confirm("Sei sicuro di voler prenotate questo libro?"); // finestra di dialogo per confermare la cancellazione di un libri
         if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
             $.ajax({
-                url: "http://localhost/bibliotecauniversitaria/rest/create_assign.php", // specifica l'URL a cui inviare la richiesta
-                type: "POST", // specifica il autore di richiesta
+                url: "http://localhost/bibliotecauniversitaria/rest/create_assign.php?isbn=" + event.target.value + "&matricola=" + $('#nrmatricola').text(), // specifica l'URL a cui inviare la richiesta
+                type: "GET", // specifica il autore di richiesta
                 contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
                 success: function (response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
                     // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-                    alert("libro prenotato!");
+                    alert("Libro prenotato!");
                     on_read(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli libri 
+                    on_read_user();
                 },
                 error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
                     // stampo l'errore sulla console
@@ -139,17 +142,18 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
         }
     }
 
-    on_bookreturn = function (matricola) {
+    on_bookreturn = function (event) {
         conf = confirm("Sei sicuro di voler eliminare questo libri?"); // finestra di dialogo per confermare la cancellazione di un'assegnazione
         if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
             $.ajax({
-                url: "http://localhost/bibliotecauniversitaria/rest/delete_assign.php?isbn=" + event.target.value + "&matricola=" + matricola, // specifica l'URL a cui inviare la richiesta
+                url: "http://localhost/bibliotecauniversitaria/rest/delete_assign.php?isbn=" + event.target.value + "&matricola=" + $('#nrmatricola').text(), // specifica l'URL a cui inviare la richiesta
                 type: "DELETE", // specifica il autore di richiesta
                 contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
                 success: function (response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
                     // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
                     alert("libro eliminato!");
                     on_read_user(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli libri 
+                    on_read();
                 },
                 error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
                     // stampo l'errore sulla console

@@ -12,6 +12,33 @@ class Assegnazione
 		$this->conn = $db;
 	}
 
+	private function update_qty($sign)
+	{
+		$query = "SELECT giacenza FROM libri WHERE isbn=:isbn";
+		$stmt = $this->conn->prepare($query);
+
+		// rimuovo caratteri speciali eventualmente inseriti nel form
+		$this->isbn = htmlspecialchars(strip_tags($this->isbn));
+		$this->matricola = htmlspecialchars(strip_tags($this->matricola));
+
+        $stmt->bindParam(":isbn", $this->isbn);
+		
+		$stmt->execute();
+		$giacenza = $stmt->fetch()[0];
+
+		$query = "UPDATE libri SET giacenza = ". $giacenza ." ". $sign ." 1 WHERE isbn=:isbn";
+		$stmt = $this->conn->prepare($query);
+
+		// rimuovo caratteri speciali eventualmente inseriti nel form
+		$this->isbn = htmlspecialchars(strip_tags($this->isbn));
+		$this->matricola = htmlspecialchars(strip_tags($this->matricola));
+
+        $stmt->bindParam(":isbn", $this->isbn);
+		
+		$stmt->execute();
+
+	}
+
 	// servizio di lettura
 	function read()
 	{
@@ -28,8 +55,7 @@ class Assegnazione
 	function create()
 	{
 		// inserisco il nuovo evento
-		$query = "INSERT INTO assegnazioni SET
-				  isbn=:isbn, matricola=:matricola";
+		$query = "INSERT INTO assegnazioni SET isbn=:isbn, matricola=:matricola";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 
@@ -44,6 +70,8 @@ class Assegnazione
 		// eseguo la query
 		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
 
+		$this->update_qty("-");
+
 		return $stmt;
 	}
 
@@ -52,6 +80,7 @@ class Assegnazione
 	{
 		// cancello il libro con l'isbn indicato
 		$query = "DELETE FROM assegnazioni WHERE isbn = ? AND matricola = ?";
+		
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
 		// sanifico
@@ -61,6 +90,9 @@ class Assegnazione
 		$stmt->bindParam(2, $this->matricola);
 		// eseguo la query
 		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
+
+		$this->update_qty("+");
+
 		return $stmt;
 	}
 

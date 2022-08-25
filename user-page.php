@@ -117,8 +117,7 @@ include 'common/header.html';
   <script>
     // all'apertura della pagina vengono avviate le funzioni on_read() e on_read_user()
     $(function() {
-      var matricola = $('#nrmatricola').text();
       on_read();
-      on_read_user(matricola);
+      on_read_user();
     });
   </script>
