@@ -18,23 +18,24 @@ class Libro
 	// servizio di lettura
 	function read()
 	{
-		// seleziono tutti gli eventi ordinandoli per il nome in ordine alfabetico
+		// seleziono tutti i libri ordinandoli per autore in ordine alfabetico
 		$query = "SELECT * FROM libri ORDER BY libri.autore ASC";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
-		// eseguo la query
-		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		// eseguo la query, $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		$stmt->execute();
 		return $stmt;
 	}
 
+	// servizio di lettura libri disponibili
 	function read_available()
 	{
-		// seleziono tutti gli eventi ordinandoli per il nome in ordine alfabetico
+		// seleziono tutti i libri con giacenza > 0 ordinandoli per autore in ordine alfabetico
 		$query = "SELECT * FROM libri WHERE giacenza > 0 ORDER BY libri.autore ASC";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
-		// eseguo la query
-		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		// eseguo la query, $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		$stmt->execute();
 		return $stmt;
 	}
 
@@ -61,8 +62,8 @@ class Libro
         $stmt->bindParam(":isbn", $this->isbn);
 		$stmt->bindParam(":giacenza", $this->giacenza);
 
-		// eseguo la query
-		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		// eseguo la query, $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		$stmt->execute();
 
 		return $stmt;
 	}
@@ -74,19 +75,19 @@ class Libro
 		$query = "DELETE FROM libri WHERE isbn = ?";
 		// preparo la query
 		$stmt = $this->conn->prepare($query);
-		// sanifico
+		// rimuovo caratteri speciali eventualmente inseriti nel form
 		$this->id = htmlspecialchars(strip_tags($this->isbn));
 		// invio il valore del libro per il parametro
 		$stmt->bindParam(1, $this->isbn);
-		// eseguo la query
-		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		// eseguo la query, $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		$stmt->execute();
 		return $stmt;
 	}
 
 	// servizio di ricerca per keywords
 	function search($keywords)
 	{
-		// cerco gli eventi ordinandoli per il nome in ordine alfabetico
+		// cerco i libri ordinandoli per autore in base al valore di ricerca su tutti i campi della tabella
 		$query = "SELECT * FROM libri
 				  WHERE libri.titolo LIKE ? OR libri.autore LIKE ? OR libri.editore LIKE ? OR libri.isbn LIKE ?
 				  ORDER BY libri.titolo ASC";
@@ -104,8 +105,8 @@ class Libro
 		$stmt->bindParam(3, $keywords);
 		$stmt->bindParam(4, $keywords);
 
-		// eseguo la query
-		$stmt->execute(); // $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		// eseguo la query, $stmt conterrà il risultato dell'esecuzione della query (recordset)
+		$stmt->execute();
 
 		return $stmt;
 	}
