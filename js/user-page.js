@@ -1,4 +1,5 @@
-$(function () { // il codice incluso verrà eseguito solo quando la pagina DOM è pronta per l'esecuzione del codice JavaScript
+// quando la pagina è caricata completamente...
+$(function () {
 
     on_read = function () {
         $.ajax({
@@ -13,7 +14,6 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
                     autore = response.libri[i].autore;
                     editore = response.libri[i].editore;
                     giacenza = response.libri[i].giacenza;
-
                     id_reserve = response.libri[i].isbn;
                     html_table += "<tr><td>" + isbn + "</td><td> " + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td> " + giacenza + "</td><td><input type='image' class='create-assign-button' src='images/check.gif' value='" + id_reserve + "'></td></tr>";
                 }
@@ -22,8 +22,8 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
                 $(".create-assign-button").on("click", on_bookreserve); // all'on click del cestino parte la funzione on_bookreturn()
                 $("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
             },
-            error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
-                // stampo l'errore sulla console
+            error: function (xhr, err, exc) {
+                // in caso di errore, viene mostrato sulla console
                 console.log(xhr, err, exc);
             }
         });
@@ -57,8 +57,8 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
                     $("#read-all").on("submit", on_read); // all'on submit del pulsante #read-all parte la funzione on_read()
                 }
             },
-            error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
-                // stampo l'errore sulla console
+            error: function (xhr, err, exc) {
+                // in caso di errore, viene mostrato sulla console
                 console.log(xhr, err, exc);
             }
         });
@@ -66,15 +66,8 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
     }
 
     on_delete = function (event) {
-        /**
-         * A differenza delle altre, la callback "on_delete" utilizza il parametro in ingresso "event"
-         * associato all'elemento html cliccato (ovvero il cestino). Serve "event" perché in questo caso
-         * è presente un cestino per ogni riga, quindi quando si invoca questa callback è necessario
-         * capire in che riga si è cliccato.
-         * In dettaglio, il "event.target.value" corrisponde all'id dell'libri che si vuole eliminare, poiché
-         * è stato così settato in fase di read (si veda la callback "on_read").
-         */
-        conf = confirm("Sei sicuro di voler eliminare questo libri?"); // finestra di dialogo per confermare la cancellazione di un libri
+        // il parametro event consente di capire quale dei libri si vuole cancellare
+        conf = confirm("Sei sicuro di voler eliminare questo libro?"); // finestra di dialogo per confermare la cancellazione di un libri
         if (conf) { // se l'utente clicca sì parte la chiamata ajax per il servizio delete
             $.ajax({
                 url: "http://localhost/bibliotecauniversitaria/rest/delete.php?isbn=" + event.target.value, // specifica l'URL a cui inviare la richiesta
@@ -85,8 +78,8 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
                     alert("libro eliminato!");
                     on_read(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli libri 
                 },
-                error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
-                    // stampo l'errore sulla console
+                error: function (xhr, err, exc) {
+                    // in caso di errore, viene mostrato sulla console
                     console.log(xhr, err, exc);
                 }
             });
@@ -108,11 +101,11 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
             data: JSON.stringify(formData), // specifica i dati da inviare al server
             success: function (response) { // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
                 // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-                alert("libro inserito!");
+                alert("Libro inserito correttamente!");
                 on_read(); // dopo la creazione dell'libri parte la funzione on_read()
             },
-            error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
-                // stampo l'errore sulla console
+            error: function (xhr, err, exc) {
+                // in caso di errore, viene mostrato sulla console
                 console.log(xhr, err, exc);
             }
         });
@@ -128,12 +121,12 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
                 contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
                 success: function (response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
                     // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-                    alert("Libro prenotato!");
+                    alert("Libro prenotato correttamente!");
                     on_read(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli libri 
                     on_read_user();
                 },
-                error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
-                    // stampo l'errore sulla console
+                error: function (xhr, err, exc) {
+                    // in caso di errore, viene mostrato sulla console
                     console.log(xhr, err, exc);
                 }
             });
@@ -150,12 +143,12 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
                 contentType: 'application/json', // il autore di contenuto utilizzato durante l'invio di dati al server
                 success: function (response) { // // response = messaggio. Success è la funzione che verrà eseguita in caso di successo 
                     // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-                    alert("libro eliminato!");
+                    alert("Libro riconsegnato correttamente!");
                     on_read_user(); // dopo aver eliminato l'libri parte la funzione on_read() per leggere nuovamente tutti gli libri 
                     on_read();
                 },
-                error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
-                    // stampo l'errore sulla console
+                error: function (xhr, err, exc) {
+                    // in caso di errore, viene mostrato sulla console
                     console.log(xhr, err, exc);
                 }
             });
@@ -171,14 +164,7 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
             type: "GET", // specifica il autore di richiesta
             success: function (response) { // response = lista di libri (array di oggetti JSON). Success è la funzione che verrà eseguita in caso di successo 
                 // della chiamata a cui passiamo come parametro response che rappresenta i dati restituiti dal server web
-                html_table = `<table id='center'>
-						<tr>
-							<th>ISBN</th>
-							<th>Titolo</th>
-							<th>Autore</th>
-							<th>Editore</th>
-							<th>Giacenza</th>
-						</tr>`;
+                html_table = "<table id='center'><tr><th>ISBN</th><th>Titolo</th><th>Autore</th><th>Editore</th><th>Giacenza</th></tr>";
                 if (response.libri.length > 0) { // se la response restituisce qualche libri
                     for (i = 0; i < response.libri.length; i++) { // ciclo for sull'array response
                         titolo = response.libri[i].titolo; // prendo i valori delle proprietà di ogni singolo libri
@@ -188,17 +174,15 @@ $(function () { // il codice incluso verrà eseguito solo quando la pagina DOM �
                         html_table += "<tr><td>" + titolo + "</td><td> " + autore + "</td><td> " + editore + "</td><td><input type='image' class='delete-button' src='images/cestino.png' value='" + id_delete + "'></td></tr>";
                     }
                 } else {
-                    html_table += `<tr>
-							<td colspan='4'>Nessun risultato per "${s_search}"</td>
-							</tr>`;
+                    html_table += "<tr><td colspan='4'>Nessun risultato per "+s_search+"</td></tr>";
                 }
                 html_table += "</table>";
                 $("#libri").html(html_table); // inserisco la tabella nel div #libri
                 $(".delete-button").on("click", on_delete); // all'on click del cestino parte la funzione on_delete()
                 $("#read-all").on("submit", on_read); // all'on submit dell pulsante #read-all parte la funzione on_read()
             },
-            error: function (xhr, err, exc) { // error verrà eseguita in caso di errore
-                // stampo l'errore sulla console
+            error: function (xhr, err, exc) {
+                // in caso di errore, viene mostrato sulla console
                 console.log(xhr, err, exc);
             }
         });
