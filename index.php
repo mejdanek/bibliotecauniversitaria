@@ -34,14 +34,14 @@ include 'common/header.html';
            
             <div id="main">
                 <!--Inizio contenuto della pagina-->
-                <p id="p01"> Vi presentiamo la  <strong>"biblioteca universitaria"</strong>.<br>Partendo dai requisiti richiesti, questo progetto è stato sviluppato in linguaggio PHP per la generazione delle pagine, per la connessione al database MySQL e per la gestione della autenticazione utenti.
+                <p id="p01"> Vi presentiamo la  <strong>"Biblioteca Universitaria"</strong>.<br>Partendo dai requisiti richiesti, questo progetto è stato sviluppato in linguaggio PHP per la generazione delle pagine, per la connessione al database MySQL e per la gestione della autenticazione utenti.
                 La grafica è stata impostata grazie a Bootstrap effettuando delle modifiche personalizzate. Mentre il comportamento delle pagine è stato reso possibile grazie a JQuery; il contenuto dinamico avviene tramite chiamate Ajax
                 Il sito è anche predisposto per l'interfacciamento REST.<br><br>
-			     Questa applicazione è composta da due aree che sono quella dedicata agli utenti (frontend) e quella dedicata all'amministrazione dei dati del sito (backend). Per entrambe le aree è previsto un accesso con nome utente e password (memorizzati nel database non in chiaro ovvero con pw crittografate).
-                 Una volta effettuato l'accesso nell'area utente sarà possibile visualizzare il relativo numero di matricola, il numero di libri in prestito, controllare la lista di libri disponibili nell'archivio con possibilità di prenotazione immediata.
-                 Dopodichè è possibile effettuare il cambio di password e indirizzo mail dell'utente loggato.
+			     Questa applicazione è composta da due aree: una dedicata agli utenti (frontend) e una dedicata all'amministrazione dei dati del sito (backend). Per entrambe le aree è previsto un accesso con nome utente e password (memorizzati nel database non in chiaro, ovvero con pw crittografate).
+                 Una volta effettuato l'accesso nell'area utente, si può visualizzare il relativo numero di matricola, il numero di libri in prestito, controllare la lista di libri disponibili nell'archivio con possibilità di prenotazione immediata.
+                 Dopodichè viene consentito il cambio di password e indirizzo mail dell'utente loggato.
 
-                 Nell'area di amministrazione è invece possibile verificare la lista di tutti i libri presenti nell'archivio ed eventualmente rimuoverli, inserire un nuovo libro (compreso di tutte le sue caratteristiche) ed infine è possibile effettuare la cancellazione di un utente. 
+                 Nell'area di amministrazione si può accedere alla lista di tutti i libri presenti nell'archivio ed eventualmente rimuoverli, inserire un nuovo libro (compreso di tutte le sue caratteristiche) ed infine effettuare la cancellazione di un utente. 
                  <br> <br>
 			
                 </p>

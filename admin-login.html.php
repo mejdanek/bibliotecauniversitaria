@@ -41,7 +41,7 @@ include 'common/header.html';
 			<header>
 				<br>
 				<!--Titolo-->
-				<h1>Admin Area</h1><br><br><br>
+				<center><h1>Admin Area</h1></center><br><br><br>
 			</header>
 			<!--Inizio form-->
 			<div id="center">

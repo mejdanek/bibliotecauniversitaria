@@ -25,15 +25,14 @@ include 'common/header.html';
 
 	  <main role="main" class="container">
 		<div class="jumbotron">
+	<center>
 	<header>
-		<!--LogoICT-->
-		<a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo"
-				title="Logo#CPS/external link"></a>
 		<!--Titolo-->
 		<h1>Logout effettuato correttamente!<br><br> <img src="images/check.gif" alt="check" title="Check" width="100">
 		</h1><br>
 		<p id="p01"><a href="admin-login.html.php" title="internal link">Torna alla pagina di login</a></p>
 	</header>
+	</center>
 	<br><br><br><br><br>
 	</div>
 	</main>

@@ -41,16 +41,9 @@ include 'common/header.html';
   <main role="main" class="container">
     <div class="jumbotron">
       <header>
-        <br>
-        <!--LogoICT-->
-        <a href="index.php"><img id="left" src="images/logo.png" width="200" alt="logo" title="Logo#CPS/external link"></a>
         <!--Titolo-->
         <h1>Registrati</h1>
       </header><br><br>
-      <!--Immagine destra-->
-      <br>
-      <div id="right"><img src="images/registrazione.png" alt="registrazione" title="Foglio con penna" width="200"></div>
-      <br><br><br><br>
       <!--Inizio form-->
       <div id="center">
         <form id="registration-form" action="registration.php" method="post" name="registrazione">

@@ -39,7 +39,7 @@ include 'common/header.html';
 		<div class="jumbotron">
 			<header>
 				<!--Titolo-->
-				<h1>Accedi ai servizi</h1><br><br><br>
+				<center><h1>Accedi ai servizi</h1></center><br><br><br>
 			</header>
 			<!--Inizio form-->
 			<div id="center">

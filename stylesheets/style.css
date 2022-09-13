@@ -19,10 +19,11 @@ table td,th{
     text-align: center;
 }
 
-h2{
+h1, h2{
     margin-bottom: 20px;
     text-align: center;
 }
+
 
 fieldset *{
    text-align: center;

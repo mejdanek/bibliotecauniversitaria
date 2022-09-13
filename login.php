@@ -8,7 +8,10 @@ $conn = $database->getConnection();
 
 $matricola = $_POST['matricola'];
 $password = md5($_POST['password']);
-$sql = "SELECT matricola,password FROM utenti WHERE matricola='$matricola' AND password='$password'"; // seleziono dalla tabella admin la colonna username e password in cui i dati (username e password) corrispondono a quelli dell'utente
+$sql = "SELECT matricola,password FROM utenti WHERE matricola='$matricola' AND password='$password'"; 
+
+// seleziono dalla tabella admin la colonna username e password in cui i dati (username e password)
+// corrispondono a quelli dell'utente
 
 $stmt = $conn->prepare($sql);
 $stmt->execute();
